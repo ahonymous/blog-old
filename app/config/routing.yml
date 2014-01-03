@@ -1,0 +1,3 @@
+ahonymous_blog:
+    resource: "@AhonymousBlogBundle/Resources/config/routing.yml"
+
