@@ -26,9 +26,23 @@
 
             <ul class="nav navbar-nav">
                 <nav class="blog-nav">
-                    <a class="blog-nav-item active" href={{ path('home') }}>Home</a>
-                    <a class="blog-nav-item" href="#">About me</a>
-                    <a class="blog-nav-item" href="#">GuestBook</a>
+                    <a class="blog-nav-item {{
+                        app.request.attributes.get('_route') == 'home' ? 'active'
+                    }}"
+                       href={{ path('home') }}>
+                        Home
+                    </a>
+                    <a class="blog-nav-item {{
+                        app.request.attributes.get('_route') == 'about' ? 'active'
+                    }}"
+                       href={{ path('about') }}>
+                        About me
+                    </a>
+                    <a class="blog-nav-item {{
+                    app.request.attributes.get('_route') == 'guest' ? 'active'
+                    }}" href="{{ path('guest') }}">
+                        GuestBook
+                    </a>
                 </nav>
             </ul>
 
