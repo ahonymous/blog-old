@@ -1,4 +1,4 @@
 _hello:
     resource: "@AhonymousBlogBundle/Controller/"
     type:     annotation
-    prefix:   /hello
+    prefix:   /

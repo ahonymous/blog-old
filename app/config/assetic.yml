@@ -28,9 +28,11 @@ assetic:
            inputs:
                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js
            output: js/bootstrap.min.js
-        javaScript-bootstrap:
+        blog:
            inputs:
-               - %kernel.root_dir%/../vendor/twbs/bootstrap/docs/examples/blog/blog.css
+               - %kernel.root_dir%/../src/Ahonymous/Bundle/BlogBundle/Resources/public/css/blog.css
+           filters:
+               - yui_css
            output: css/blog.css
         ie8:
            inputs:
