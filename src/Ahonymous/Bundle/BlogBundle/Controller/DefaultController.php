@@ -14,7 +14,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return array('name' => 'Alex');
+        return array();
     }
 
     /**
@@ -23,7 +23,7 @@ class DefaultController extends Controller
      */
     public function aboutAction()
     {
-        return array('name' => 'About');
+        return array();
     }
 
     /**
@@ -32,6 +32,6 @@ class DefaultController extends Controller
      */
     public function guestAction()
     {
-        return array('name' => 'guest');
+        return array();
     }
 }
