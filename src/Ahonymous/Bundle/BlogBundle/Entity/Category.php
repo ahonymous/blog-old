@@ -4,8 +4,9 @@ namespace Ahonymous\Bundle\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\Common\Collections\ArrayCollaction;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Ahonymous\Bundle\BlogBundle\Entity\Article;
 
 /**
  * Category
@@ -69,5 +70,137 @@ class Category
     public function getId()
     {
         return $this->id;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Category
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Category
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Category
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set deleted
+     *
+     * @param \DateTime $deleted
+     * @return Category
+     */
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    /**
+     * Get deleted
+     *
+     * @return \DateTime 
+     */
+    public function getDeleted()
+    {
+        return $this->deleted;
+    }
+
+    /**
+     * Add article
+     *
+     * @param Article $article
+     * @return Category
+     */
+    public function addArticle(Article $article)
+    {
+        $this->articles[] = $article;
+
+        return $this;
+    }
+
+    /**
+     * Remove article
+     *
+     * @param Article $article
+     */
+    public function removeArticle(Article $article)
+    {
+        $this->articles->removeElement($article);
+    }
+
+    /**
+     * Get articles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getArticles()
+    {
+        return $this->articles;
     }
 }
