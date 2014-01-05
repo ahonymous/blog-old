@@ -49,6 +49,6 @@ assetic:
         holder:
            inputs:
                - %kernel.root_dir%/../vendor/twbs/bootstrap/docs/assets/js/holder.js
-#           filters:
-#               - yui_css
+           filters:
+               - yui_css
            output: js/holder.js
