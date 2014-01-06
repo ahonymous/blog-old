@@ -51,7 +51,7 @@ class Article
     private $slug;
 
     /**
-     * @var ArrayCollaction $authors
+     * @var ArrayCollection $authors
      *
      * @ORM\ManyToOne(targetEntity="Author", inversedBy="articles")
      */
@@ -79,14 +79,14 @@ class Article
     private $deleted;
 
     /**
-     * @var ArrayCollaction $categories
+     * @var ArrayCollection $categories
      *
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="articles")
      */
     private $categories;
 
     /**
-     * @var ArrayCollaction $comments
+     * @var ArrayCollection $comments
      *
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="article")
      */

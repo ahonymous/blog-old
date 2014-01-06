@@ -28,7 +28,7 @@ class Comment
     private $id;
 
     /**
-     * @var ArrayCollaction $authors
+     * @var ArrayCollection $authors
      *
      * @ORM\ManyToOne(targetEntity="Author", inversedBy="comments")
      */
@@ -64,7 +64,7 @@ class Comment
     private $deleted;
 
     /**
-     * @var ArrayCollaction $comments
+     * @var ArrayCollection $comments
      *
      * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments")
      */

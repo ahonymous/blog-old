@@ -58,14 +58,14 @@ class Author
     private $deleted;
 
     /**
-     * @var ArrayCollaction $authors
+     * @var ArrayCollection $authors
      *
      * @ORM\OneToMany(targetEntity="Article", mappedBy="author")
      */
     private $articles;
 
     /**
-     * @var ArrayCollaction $authors
+     * @var ArrayCollection $authors
      *
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="author")
      */

@@ -42,7 +42,7 @@ class Category
     private $description;
 
     /**
-     * @var ArrayCollaction $articles
+     * @var ArrayCollection $articles
      *
      * @ORM\ManyToMany(targetEntity="Article", mappedBy="$categories")
      */
