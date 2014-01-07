@@ -3,10 +3,6 @@ _hello:
     type:     annotation
     prefix:   /
 
-_author:
-        resource: "@AhonymousBlogBundle/Resources/config/routing/author.yml"
-        prefix:   /author
-
 _article:
         resource: "@AhonymousBlogBundle/Resources/config/routing/article.yml"
         prefix:   /article
@@ -14,8 +10,4 @@ _article:
 _category:
         resource: "@AhonymousBlogBundle/Resources/config/routing/category.yml"
         prefix:   /category
-
-_comment:
-        resource: "@AhonymousBlogBundle/Resources/config/routing/comment.yml"
-        prefix:   /comment
 

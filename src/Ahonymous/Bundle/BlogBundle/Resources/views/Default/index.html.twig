@@ -3,4 +3,24 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
+    {% for article in articles %}
+        <div class="blog-post">
+            <h2 class="blog-title">
+                <a href="{{ path('article_show', { 'slug': article.slug }) }}">
+                    {{ article.name }}
+                </a>
+            </h2>
+            <p class="blog-post-meta">
+                {{ article.updated|date('M d Y') }},
+                {{ article.author }}
+            </p>
+            <p>
+                {{ article.body|endsWord(200) }}
+            </p>
+            <hr>
+            <a href="{{ path('article_show', { 'slug': article.slug }) }}">
+                Read more
+            </a>
+        </div>
+    {% endfor %}
 {% endblock content %}

@@ -1,52 +1,24 @@
-{% extends '::base.html.twig' %}
+{% extends 'AhonymousBlogBundle::main.html.twig' %}
 
-{% block body -%}
-    <h1>Article</h1>
+{% block content -%}
+    <h1>{{ article.name }}</h1>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ entity.name }}</td>
-            </tr>
-            <tr>
-                <th>Body</th>
-                <td>{{ entity.body }}</td>
-            </tr>
-            <tr>
-                <th>Slug</th>
-                <td>{{ entity.slug }}</td>
-            </tr>
-            <tr>
-                <th>Created</th>
-                <td>{{ entity.created|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Updated</th>
-                <td>{{ entity.updated|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Deleted</th>
-                <td>{{ entity.deleted|date('Y-m-d H:i:s') }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <p class="blog-post-body">
+            {{ article.body|nl2p("blog-post-body")|raw }}
+    </p>
 
-        <ul class="record_actions">
-    <li>
+    <p class="blog-post-meta">
+        {{ article.created|date('d M Y') }}
+    </p>
+    <hr>
+    <p class="blog-post-meta">
+        <a href="{{ path('article_edit', { 'slug': article.slug }) }}">
+            Edit
+        </a>
         <a href="{{ path('article') }}">
             Back to the list
         </a>
-    </li>
-    <li>
-        <a href="{{ path('article_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+        {{ form(delete_form) }}
+    </p>
+
 {% endblock %}

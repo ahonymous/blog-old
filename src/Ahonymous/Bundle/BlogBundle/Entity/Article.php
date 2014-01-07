@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Ahonymous\Bundle\BlogBundle\Entity\Author;
 use Ahonymous\Bundle\BlogBundle\Entity\Category;
 use Ahonymous\Bundle\BlogBundle\Entity\Comment;
 
@@ -51,9 +50,11 @@ class Article
     private $slug;
 
     /**
-     * @var ArrayCollection $authors
+     * @var string $author
      *
-     * @ORM\ManyToOne(targetEntity="Author", inversedBy="articles")
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Author name is email and don't empty.")
+     * @Assert\Email(message = "Email don't correct.")
      */
     private $author;
 
@@ -84,13 +85,6 @@ class Article
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="articles")
      */
     private $categories;
-
-    /**
-     * @var ArrayCollection $comments
-     *
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article")
-     */
-    private $comments;
 
     /**
      * Get id
@@ -249,22 +243,15 @@ class Article
     }
 
     /**
-     * Set author
-     *
-     * @param Author $author
-     * @return Article
+     * @param string $author
      */
-    public function setAuthor(Author $author = null)
+    public function setAuthor($author)
     {
         $this->author = $author;
-
-        return $this;
     }
 
     /**
-     * Get author
-     *
-     * @return Author
+     * @return string
      */
     public function getAuthor()
     {
@@ -305,35 +292,10 @@ class Article
     }
 
     /**
-     * Add comment
-     *
-     * @param Comment $comment
-     * @return Article
+     * @return string
      */
-    public function addComment(Comment $comment)
+    public function __toString()
     {
-        $this->comments[] = $comment;
-
-        return $this;
-    }
-
-    /**
-     * Remove comment
-     *
-     * @param Comment $comment
-     */
-    public function removeComment(Comment $comment)
-    {
-        $this->comments->removeElement($comment);
-    }
-
-    /**
-     * Get comments
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getComments()
-    {
-        return $this->comments;
+        return $this->getName();
     }
 }

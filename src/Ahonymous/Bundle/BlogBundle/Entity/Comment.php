@@ -6,8 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Ahonymous\Bundle\BlogBundle\Entity\Author;
-use Ahonymous\Bundle\BlogBundle\Entity\Article;
+
 
 /**
  * Comment
@@ -28,9 +27,11 @@ class Comment
     private $id;
 
     /**
-     * @var ArrayCollection $authors
+     * @var string $author
      *
-     * @ORM\ManyToOne(targetEntity="Author", inversedBy="comments")
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Author name is email and don't empty.")
+     * @Assert\Email(message = "Email don't correct.")
      */
     private $author;
 
@@ -70,6 +71,11 @@ class Comment
      */
     private $article;
 
+    /**
+     * @Gedmo\Slug(fields={"id", "author"})
+     * @ORM\Column(length=255, unique=true)
+     */
+    private $slug;
 
     /**
      * Get id
@@ -174,22 +180,15 @@ class Comment
     }
 
     /**
-     * Set author
-     *
-     * @param Author $author
-     * @return Comment
+     * @param string $author
      */
-    public function setAuthor(Author $author = null)
+    public function setAuthor($author)
     {
         $this->author = $author;
-
-        return $this;
     }
 
     /**
-     * Get author
-     *
-     * @return Author
+     * @return string
      */
     public function getAuthor()
     {
@@ -218,4 +217,27 @@ class Comment
     {
         return $this->article;
     }
-}
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getId();
+    }}
