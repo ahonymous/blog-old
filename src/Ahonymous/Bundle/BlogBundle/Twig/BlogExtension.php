@@ -40,12 +40,12 @@ class BlogExtension extends \Twig_Extension
         }
 
         if (!is_null($str)){
-            $clause = explode(' ', $str);
-            $come = $clause[0];
+            $close = explode(' ', $str);
+            $come = '';
             $i = 0;
-            while (strlen($come) < $length-3)
+            while (strlen($come) < $length)
             {
-                $come .= ' ' . $clause[$i++];
+                $come .= ' ' . $close[$i++];
             }
 
             return $come . '...';

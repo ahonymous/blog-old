@@ -105,7 +105,8 @@ class ArticleController extends Controller
 
         return $this->render('AhonymousBlogBundle:Article:show.html.twig', array(
             'article'      => $article,
-            'delete_form' => $deleteForm->createView(),        ));
+            'delete_form' => $deleteForm->createView(),
+            ));
     }
 
     /**
@@ -216,7 +217,7 @@ class ArticleController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('article_delete', array('slug' => $slug)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('delete', 'submit', array('label' => 'Delete', 'attr' => array('class' => "btn btn-danger")))
             ->getForm()
         ;
     }

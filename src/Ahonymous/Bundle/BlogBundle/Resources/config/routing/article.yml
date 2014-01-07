@@ -2,11 +2,6 @@ article:
     pattern:  /
     defaults: { _controller: "AhonymousBlogBundle:Article:index" }
 
-article_show:
-#    pattern:  /{id}/show
-    pattern:  /{slug}/show
-    defaults: { _controller: "AhonymousBlogBundle:Article:show" }
-
 article_new:
     pattern:  /new
     defaults: { _controller: "AhonymousBlogBundle:Article:new" }

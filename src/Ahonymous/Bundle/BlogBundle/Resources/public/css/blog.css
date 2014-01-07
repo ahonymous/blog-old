@@ -150,16 +150,22 @@ h6, .h6 {
 
 
 /* Pagination */
-.pager {
-  margin-bottom: 60px;
-  text-align: left;
-}
-.pager > li > a {
-  width: 140px;
-  padding: 10px 20px;
+.pagination {
   text-align: center;
-  border-radius: 30px;
 }
+
+.pagination > li > a {
+  /*width: 140px;*/
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 30px;
+}
+
+.pagination > .active > a {
+  background-color: #aacd4e;
+  border-color: #aacd4e;
+}
+
 
 
 /*
@@ -178,6 +184,7 @@ h6, .h6 {
 .blog-post-meta {
   margin-bottom: 20px;
   color: #999;
+  text-align: right;
 }
 
 .blog-post-body {

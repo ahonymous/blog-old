@@ -1,5 +1,7 @@
 {% extends 'AhonymousBlogBundle::main.html.twig' %}
 
+{% block title %}{{ article.name }}{% endblock title %}
+
 {% block content -%}
     <h1>{{ article.name }}</h1>
 
@@ -14,8 +16,8 @@
     <p class="blog-post-meta">
         <a href="{{ path('article_edit', { 'slug': article.slug }) }}">
             Edit
-        </a>
-        <a href="{{ path('article') }}">
+        </a>&nbsp;&nbsp;&nbsp;
+        <a href="{{ path('article') }}" >
             Back to the list
         </a>
         {{ form(delete_form) }}

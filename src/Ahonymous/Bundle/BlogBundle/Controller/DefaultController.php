@@ -3,28 +3,42 @@
 namespace Ahonymous\Bundle\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+//use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Ahonymous\Bundle\BlogBundle\Entity\Article;
 use Ahonymous\Bundle\BlogBundle\Form\ArticleType;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
 
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="home")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction($page)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $articles = $em->getRepository('AhonymousBlogBundle:Article')->findAllArticles();
+        $query = $em->getRepository('AhonymousBlogBundle:Article')->findAllArticles();
+        $adapter = new DoctrineORMAdapter($query);
 
-        return array('articles' => $articles);
+        if (!$page) {
+            $page = 1;
+        }
+        $pager = new Pagerfanta($adapter);
+        $pager->setMaxPerPage(2);
+
+        try {
+            $pager->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            throw new NotFoundHttpException('Illegal page');
+        }
+
+
+        return array('articles' => $pager);
     }
 
     /**
-     * @Route("/about", name="about")
      * @Template()
      */
     public function aboutAction()
@@ -33,7 +47,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/guest", name="guest")
      * @Template()
      */
     public function guestAction()

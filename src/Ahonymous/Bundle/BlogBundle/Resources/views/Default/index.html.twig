@@ -15,12 +15,16 @@
                 {{ article.author }}
             </p>
             <p>
-                {{ article.body|endsWord(200) }}
+                {{ article.body|endsWord(200)|nl2p("blog-post-body")|raw }}
             </p>
             <hr>
             <a href="{{ path('article_show', { 'slug': article.slug }) }}">
                 Read more
             </a>
         </div>
+
     {% endfor %}
+    <div class="pagerfanta">
+        {{ pagerfanta(articles, 'twitter_bootstrap3') }}
+    </div>
 {% endblock content %}
