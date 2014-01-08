@@ -1,0 +1,6 @@
+<div class="sidebar-module sidebar-module-inset">
+    <h4>Most Viewed Articles</h4>
+    {% for most_article in sidebar_most_viewed %}
+        <a href="{{ path('article_show', { 'slug': most_article.slug }) }}">{{ most_article.name }}</a><hr>
+    {% endfor %}
+</div>

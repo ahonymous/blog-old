@@ -29,4 +29,14 @@ class ArticleRepository extends EntityRepository
 
         return $query;
     }
+
+    public function findMostViewedName($limit = 5)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('SELECT a.name, a.slug FROM AhonymousBlogBundle:Article a ORDER BY a.viewed DESC')
+            ->setMaxResults($limit)
+        ;
+
+        return $query;
+    }
 }

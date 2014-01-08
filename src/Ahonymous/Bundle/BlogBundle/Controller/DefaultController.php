@@ -56,6 +56,17 @@ class DefaultController extends Controller
     /**
      * @Template()
      */
+    public function sidebarMostViewedArticlesAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $queryMostViewed = $em->getRepository('AhonymousBlogBundle:Article')->findMostViewedName(2);
+
+        return array('sidebar_most_viewed' => $queryMostViewed->getResult());
+    }
+
+    /**
+     * @Template()
+     */
     public function sidebarLastArticlesAction()
     {
         $em = $this->getDoctrine()->getManager();

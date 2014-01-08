@@ -85,6 +85,11 @@ class Article
     private $categories;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $viewed;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -294,5 +299,21 @@ class Article
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @param mixed $viewed
+     */
+    public function setViewed($viewed)
+    {
+        $this->viewed = $viewed;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getViewed()
+    {
+        return $this->viewed;
     }
 }
