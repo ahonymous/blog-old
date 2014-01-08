@@ -19,4 +19,14 @@ class ArticleRepository extends EntityRepository
 
         return $query;
     }
+
+    public function findLastName($limit = 5)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('SELECT a.name, a.slug FROM AhonymousBlogBundle:Article a ORDER BY a.updated DESC')
+            ->setMaxResults($limit)
+        ;
+
+        return $query;
+    }
 }

@@ -3,11 +3,26 @@
 {% block content -%}
     <h1>Article edit</h1>
 
-    {{ form(edit_form) }}
+    {#{{ form(edit_form, { 'attr': {'class': 'form'}}) }}#}
+    {{ form_start(edit_form) }}
+        {{ form_label(edit_form.name) }}
+        {{ form_widget(edit_form.name, { 'attr': {'class': 'form'}}) }}
+
+        {{ form_label(edit_form.body) }}
+        {{ form_widget(edit_form.body, { 'attr': {'class': 'form'}}) }}
+
+        {{ form_label(edit_form.author) }}
+        {{ form_widget(edit_form.author, { 'attr': {'class': 'form'}}) }}
+
+        {{ form_label(edit_form.categories) }}
+        {{ form_widget(edit_form.categories, { 'attr': {'class': 'form'}}) }}
+
+    {{ form_end(edit_form) }}
+
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('article') }}">
+        <a href="{{ path('home') }}">
             Back to the list
         </a>
     </li>

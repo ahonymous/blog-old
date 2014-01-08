@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Ahonymous\Bundle\BlogBundle\Entity\Article;
 use Ahonymous\Bundle\BlogBundle\Form\ArticleType;
-use Ahonymous\Bundle\BlogBundle\Entity\Category;
 
 /**
  * Article controller.

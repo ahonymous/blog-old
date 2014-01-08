@@ -212,3 +212,8 @@ h6, .h6 {
 hr {
     margin: 0;
 }
+
+.form {
+    max-width: 600px;
+    min-width: 600px;
+}

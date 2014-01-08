@@ -19,6 +19,9 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $query = $em->getRepository('AhonymousBlogBundle:Article')->findAllArticles();
+        $queryLastName = $em->getRepository('AhonymousBlogBundle:Article')->findLastName(2);
+        $sidebar_last = $queryLastName->getResult();
+
         $adapter = new DoctrineORMAdapter($query);
 
         if (!$page) {
@@ -33,7 +36,10 @@ class DefaultController extends Controller
             throw new NotFoundHttpException('Illegal page');
         }
 
-        return array('articles' => $pager);
+        return array(
+            'articles' => $pager,
+            'sidebar_last' => $sidebar_last
+        );
     }
 
     /**
