@@ -18,8 +18,7 @@ class ArticleType extends AbstractType
             ->add('name')
             ->add('body')
             ->add('author')
-            ->add('categories', 'collection', array('type' => new CategoryType())
-            );
+            ->add('categories');
     }
     
     /**

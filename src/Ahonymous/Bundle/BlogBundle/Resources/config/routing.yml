@@ -26,7 +26,7 @@ _category:
     prefix:   /admin/category
 
 article_show:
-    pattern:  /article/{slug}/show
+    pattern:  /article/{slug}
     defaults: { _controller: "AhonymousBlogBundle:Article:show" }
 
 

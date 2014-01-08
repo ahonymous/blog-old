@@ -1,6 +1,6 @@
-{% extends '::base.html.twig' %}
+{% extends 'AhonymousBlogBundle::main.html.twig' %}
 
-{% block body -%}
+{% block content -%}
     <h1>Category list</h1>
 
     <table class="records_list">
@@ -8,27 +8,25 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Description</th>
                 <th>Created</th>
                 <th>Deleted</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for entity in entities %}
+        {% for category in categories %}
             <tr>
-                <td><a href="{{ path('category_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.name }}</td>
-                <td>{{ entity.description }}</td>
-                <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.deleted %}{{ entity.deleted|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td><a href="{{ path('category_show', { 'slug': category.slug }) }}">{{ category.id }}</a></td>
+                <td>{{ category.name }}</td>
+                <td>{% if category.created %}{{ category.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if category.deleted %}{{ category.deleted|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('category_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('category_show', { 'slug': category.slug }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('category_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('category_edit', { 'slug': category.slug }) }}">edit</a>
                     </li>
                 </ul>
                 </td>

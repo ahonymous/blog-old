@@ -3,7 +3,7 @@ category:
     defaults: { _controller: "AhonymousBlogBundle:Category:index" }
 
 category_show:
-    pattern:  /{id}/show
+    pattern:  /{slug}/show
     defaults: { _controller: "AhonymousBlogBundle:Category:show" }
 
 category_new:
@@ -16,15 +16,15 @@ category_create:
     requirements: { _method: post }
 
 category_edit:
-    pattern:  /{id}/edit
+    pattern:  /{slug}/edit
     defaults: { _controller: "AhonymousBlogBundle:Category:edit" }
 
 category_update:
-    pattern:  /{id}/update
+    pattern:  /{slug}/update
     defaults: { _controller: "AhonymousBlogBundle:Category:update" }
     requirements: { _method: post|put }
 
 category_delete:
-    pattern:  /{id}/delete
+    pattern:  /{slug}/delete
     defaults: { _controller: "AhonymousBlogBundle:Category:delete" }
     requirements: { _method: post|delete }

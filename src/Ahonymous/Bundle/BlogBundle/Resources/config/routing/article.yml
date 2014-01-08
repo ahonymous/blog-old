@@ -12,18 +12,15 @@ article_create:
     requirements: { _method: post }
 
 article_edit:
-#    pattern:  /{id}/edit
     pattern:  /{slug}/edit
     defaults: { _controller: "AhonymousBlogBundle:Article:edit" }
 
 article_update:
-#    pattern:  /{id}/update
     pattern:  /{slug}/update
     defaults: { _controller: "AhonymousBlogBundle:Article:update" }
     requirements: { _method: post|put }
 
 article_delete:
-#    pattern:  /{id}/delete
     pattern:  /{slug}/delete
     defaults: { _controller: "AhonymousBlogBundle:Article:delete" }
     requirements: { _method: post|delete }
