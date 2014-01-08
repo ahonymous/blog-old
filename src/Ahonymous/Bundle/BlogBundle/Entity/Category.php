@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Ahonymous\Bundle\BlogBundle\Entity\Article;
 
 /**
  * Category
@@ -33,13 +32,6 @@ class Category
      * @Assert\NotBlank(message = "Name don't empty.")
      */
     private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="text")
-     */
-    private $description;
 
     /**
      * @var ArrayCollection $articles
@@ -105,29 +97,6 @@ class Category
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Category
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 
     /**

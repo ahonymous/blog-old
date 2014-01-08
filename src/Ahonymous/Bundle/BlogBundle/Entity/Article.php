@@ -6,8 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Ahonymous\Bundle\BlogBundle\Entity\Category;
-use Ahonymous\Bundle\BlogBundle\Entity\Comment;
 
 /**
  * Article
@@ -101,7 +99,6 @@ class Article
     public function __construct()
     {
         $this->categories = new ArrayCollection();
-        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -266,7 +263,7 @@ class Article
      */
     public function addCategory(Category $category)
     {
-        $this->categories[] = $category;
+        $this->categories->add($category);
 
         return $this;
     }

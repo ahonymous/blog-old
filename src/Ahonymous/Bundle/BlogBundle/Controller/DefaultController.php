@@ -2,13 +2,12 @@
 
 namespace Ahonymous\Bundle\BlogBundle\Controller;
 
+use Pagerfanta\Exception\NotValidCurrentPageException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-//use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Ahonymous\Bundle\BlogBundle\Entity\Article;
-use Ahonymous\Bundle\BlogBundle\Form\ArticleType;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
@@ -33,7 +32,6 @@ class DefaultController extends Controller
         } catch (NotValidCurrentPageException $e) {
             throw new NotFoundHttpException('Illegal page');
         }
-
 
         return array('articles' => $pager);
     }

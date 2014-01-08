@@ -2,8 +2,16 @@
 
 {% block content -%}
     <h1>Article creation</h1>
-
-    {{ form(form) }}
+    {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.body) }}
+        {{ form_row(form.author) }}
+        <ul class="category">
+            {% for category in form.categories %}
+                <li>{{ form_row(category.name) }}</li>
+            {% endfor %}
+        </ul>
+    {{ form_end(form) }}
 
         <ul class="record_actions">
     <li>

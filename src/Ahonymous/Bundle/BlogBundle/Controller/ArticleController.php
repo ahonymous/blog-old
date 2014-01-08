@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Ahonymous\Bundle\BlogBundle\Entity\Article;
 use Ahonymous\Bundle\BlogBundle\Form\ArticleType;
+use Ahonymous\Bundle\BlogBundle\Entity\Category;
 
 /**
  * Article controller.
@@ -23,10 +24,10 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AhonymousBlogBundle:Article')->findAll();
+        $articles = $em->getRepository('AhonymousBlogBundle:Article')->findAll();
 
         return $this->render('AhonymousBlogBundle:Article:index.html.twig', array(
-            'entities' => $entities,
+            'articles' => $articles,
         ));
     }
     /**
@@ -35,34 +36,44 @@ class ArticleController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Article();
-        $form = $this->createCreateForm($entity);
+        $article = new Article();
+
+
+        $form = $this->createCreateForm($article);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
+            $em->persist($article);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('article_show', array('slug' => $entity->getSlug())));
+            return $this->redirect(
+                $this->generateUrl(
+                    'article_show',
+                    array('slug' => $article->getSlug())
+                )
+            );
         }
 
-        return $this->render('AhonymousBlogBundle:Article:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        return $this->render(
+            'AhonymousBlogBundle:Article:new.html.twig',
+            array(
+                'article' => $article,
+                'form'   => $form->createView(),
+            )
+        );
     }
 
     /**
     * Creates a form to create a Article entity.
     *
-    * @param Article $entity The entity
+    * @param Article $article The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Article $entity)
+    private function createCreateForm(Article $article)
     {
-        $form = $this->createForm(new ArticleType(), $entity, array(
+        $form = $this->createForm(new ArticleType(), $article, array(
             'action' => $this->generateUrl('article_create'),
             'method' => 'POST',
         ));
@@ -78,13 +89,17 @@ class ArticleController extends Controller
      */
     public function newAction()
     {
-        $entity = new Article();
-        $form   = $this->createCreateForm($entity);
+        $article = new Article();
 
-        return $this->render('AhonymousBlogBundle:Article:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        $form   = $this->createCreateForm($article);
+
+        return $this->render(
+            'AhonymousBlogBundle:Article:new.html.twig',
+            array(
+                'article' => $article,
+                'form'   => $form->createView(),
+            )
+        );
     }
 
     /**
@@ -95,7 +110,9 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $article = $em->getRepository('AhonymousBlogBundle:Article')->findOneBy(array('slug' => $slug));
+        $article = $em
+            ->getRepository('AhonymousBlogBundle:Article')
+            ->findOneBy(array('slug' => $slug));
 
         if (!$article) {
             throw $this->createNotFoundException('Unable to find Article entity.');
@@ -117,17 +134,17 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AhonymousBlogBundle:Article')->findOneBy(array('slug' => $slug));
+        $article = $em->getRepository('AhonymousBlogBundle:Article')->findOneBy(array('slug' => $slug));
 
-        if (!$entity) {
+        if (!$article) {
             throw $this->createNotFoundException('Unable to find Article entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($article);
         $deleteForm = $this->createDeleteForm($slug);
 
         return $this->render('AhonymousBlogBundle:Article:edit.html.twig', array(
-            'entity'      => $entity,
+            'article'      => $article,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -136,14 +153,14 @@ class ArticleController extends Controller
     /**
     * Creates a form to edit a Article entity.
     *
-    * @param Article $entity The entity
+    * @param Article $article The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Article $entity)
+    private function createEditForm(Article $article)
     {
-        $form = $this->createForm(new ArticleType(), $entity, array(
-            'action' => $this->generateUrl('article_update', array('slug' => $entity->getSlug())),
+        $form = $this->createForm(new ArticleType(), $article, array(
+            'action' => $this->generateUrl('article_update', array('slug' => $article->getSlug())),
             'method' => 'PUT',
         ));
 
@@ -159,14 +176,14 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AhonymousBlogBundle:Article')->findOneBy(array('slug' => $slug));
+        $article = $em->getRepository('AhonymousBlogBundle:Article')->findOneBy(array('slug' => $slug));
 
-        if (!$entity) {
+        if (!$article) {
             throw $this->createNotFoundException('Unable to find Article entity.');
         }
 
         $deleteForm = $this->createDeleteForm($slug);
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($article);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
@@ -176,7 +193,7 @@ class ArticleController extends Controller
         }
 
         return $this->render('AhonymousBlogBundle:Article:edit.html.twig', array(
-            'entity'      => $entity,
+            'article'      => $article,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -192,13 +209,13 @@ class ArticleController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AhonymousBlogBundle:Article')->findOneBy(array('slug' => $slug));
+            $article = $em->getRepository('AhonymousBlogBundle:Article')->findOneBy(array('slug' => $slug));
 
-            if (!$entity) {
+            if (!$article) {
                 throw $this->createNotFoundException('Unable to find Article entity.');
             }
 
-            $em->remove($entity);
+            $em->remove($article);
             $em->flush();
         }
 

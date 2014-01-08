@@ -18,8 +18,8 @@ class ArticleType extends AbstractType
             ->add('name')
             ->add('body')
             ->add('author')
-            ->add('categories')
-        ;
+            ->add('categories', 'collection', array('type' => new CategoryType())
+            );
     }
     
     /**
@@ -37,6 +37,6 @@ class ArticleType extends AbstractType
      */
     public function getName()
     {
-        return 'ahonymous_bundle_blogbundle_article';
+        return 'article';
     }
 }

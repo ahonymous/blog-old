@@ -14,13 +14,7 @@ class CategoryType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('name')
-            ->add('description')
-//            ->add('created')
-//            ->add('deleted')
-            ->add('articles')
-        ;
+        $builder->add('name');
     }
     
     /**
@@ -38,6 +32,6 @@ class CategoryType extends AbstractType
      */
     public function getName()
     {
-        return 'ahonymous_bundle_blogbundle_category';
+        return 'category';
     }
 }
