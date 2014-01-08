@@ -1,0 +1,11 @@
+{% block sidebar %}
+    <div class="sidebar-module sidebar-module-inset">
+        <h4>Last Articles</h4>
+        {% for last_article in sidebar_last %}
+            <a href="{{ path('article_show', { 'slug': last_article.slug }) }}">{{ last_article.name }}</a>
+        {% endfor %}
+    </div>
+    <div class="sidebar-module sidebar-module-inset">
+        <h4>Most Viewed Articles</h4>
+    </div>
+{% endblock sidebar %}

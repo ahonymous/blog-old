@@ -19,8 +19,6 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $query = $em->getRepository('AhonymousBlogBundle:Article')->findAllArticles();
-        $queryLastName = $em->getRepository('AhonymousBlogBundle:Article')->findLastName(2);
-        $sidebar_last = $queryLastName->getResult();
 
         $adapter = new DoctrineORMAdapter($query);
 
@@ -36,10 +34,7 @@ class DefaultController extends Controller
             throw new NotFoundHttpException('Illegal page');
         }
 
-        return array(
-            'articles' => $pager,
-            'sidebar_last' => $sidebar_last
-        );
+        return array('articles' => $pager);
     }
 
     /**
@@ -56,5 +51,18 @@ class DefaultController extends Controller
     public function guestAction()
     {
         return array();
+    }
+
+    /**
+     * @Template()
+     */
+    public function sidebarLastArticlesAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $queryLastName = $em->getRepository('AhonymousBlogBundle:Article')->findLastName(2);
+        $sidebar_last = $queryLastName->getResult();
+
+        return array('sidebar_last' => $sidebar_last);
     }
 }
