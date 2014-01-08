@@ -1,6 +1,103 @@
 articles:
     0:
         name: Ubuntu хранит Wi-Fi пароли простым текстом
-        body: Пользователи операционной системы Ubuntu выяснили, что пароли к беспроводным сетям в этой операционной системе хранятся в незашифрованном виде, поскольку они находятся вне директории Home, которая может быть зашифрована в ходе инсталляции ОС.\n <blockquote><p>«Я недавно зацепился за факт того, что NetworkManager по умолчанию хранит Wifi профили, *включая чистые текстовые пароли* в каталоге ‘/etc/NetworkManager/system-connections/. Я думаю это не то, что он/она ожидают, включая шифрование домашней папки, и это как-то должно быть исправлено», — написал в своём письме Пер Гут.</p><blockquote>\nРазработчики Ubuntu пояснили, что данная ситуация возникает из-за опции «Все пользователи могут подключаться к этой сети», которая включена по умолчанию. Чтобы исправить ситуацию достаточно открыть индикатор сети -> редактировать подключения -> выбор сети и нажать кнопку редактирования, после чего в общей вкладке снять флажок «Все пользователи могут подключаться к этой сети».\n Отключение этой опции перенесёт пароли в соответствующую папку, но, к сожалению, вряд ли большая часть пользователей предпримет какие-либо действия, даже зная об этом факте.\n Будет интересно узнать, изменится ли что-либо в будущем, или же в Canonical считают достаточным проведение ликбеза.
+        body: |
+            Пользователи операционной системы Ubuntu выяснили, что пароли к беспроводным сетям в этой операционной системе хранятся в незашифрованном виде, поскольку они находятся вне директории Home, которая может быть зашифрована в ходе инсталляции ОС.
+            <blockquote>«Я недавно зацепился за факт того, что NetworkManager по умолчанию хранит Wifi профили, *включая чистые текстовые пароли* в каталоге ‘/etc/NetworkManager/system-connections/. Я думаю это не то, что он/она ожидают, включая шифрование домашней папки, и это как-то должно быть исправлено», — написал в своём письме Пер Гут.</blockquote>
+            Разработчики Ubuntu пояснили, что данная ситуация возникает из-за опции «Все пользователи могут подключаться к этой сети», которая включена по умолчанию. Чтобы исправить ситуацию достаточно открыть индикатор сети -> редактировать подключения -> выбор сети и нажать кнопку редактирования, после чего в общей вкладке снять флажок «Все пользователи могут подключаться к этой сети».
+             Отключение этой опции перенесёт пароли в соответствующую папку, но, к сожалению, вряд ли большая часть пользователей предпримет какие-либо действия, даже зная об этом факте.
+              Будет интересно узнать, изменится ли что-либо в будущем, или же в Canonical считают достаточным проведение ликбеза.
+        author: alex@gmail.com
+        categories: [ubuntu, linux]
+    1:
+        name: Управление скоростью вентилятора Dell inspiron
+        body: |
+            Опишу, как я нашёл решение в борьбе с управлением скоростью вентилятора на ноутбуке Dell inspiron 5520 под управлением Ubuntu 12.04 Сразу напишу, что искал я решение несколько дней, ибо не знал с чего начать, но в итоге поиски привели меня сюда и сюда Опишу процедуру установки по полочкам: Сначала ставим пакет i8kutils:
+            <pre><code>sudo apt-get install i8kutils</code></pre>
+            Далее создадим конфигурационный файл /etc/i8kmon.conf и внесём в него следуюущий конфиг:
+            <pre><code>
+            # Sample i8kmon configuration file (/etc/i8kmon, ~/.i8kmon).
+
+            # Kernel I8K status file
+            set config(proc_i8k)    /proc/i8k
+
+            # Kernel APM status file
+            set config(proc_apm)    /proc/apm
+
+            # Kernel ACPI status file
+            set config(proc_acpi)    /proc/acpi/ac_adapter/0/status
+
+            # External program to control the fans
+            set config(i8kfan)    /usr/bin/i8kfan
+
+            # Applet geometry, override with --geometry option
+            set config(geometry)    {}
+
+            # Run as daemon, override with --daemon option
+            set config(daemon)    0
+
+            # Automatic fan control, override with --auto option
+            set config(auto)    1
+
+            # Report status on stdout, override with --verbose option
+            set config(verbose)    1
+
+            # Status check timeout (seconds), override with --timeout option
+            set config(timeout)    5
+
+            # Temperature display unit (C/F), override with --unit option
+            set config(unit)    C
+
+            # Temperature threshold at which the temperature is displayed in red
+            set config(t_high)    80
+
+            # Minimum expected fan speed
+            set config(min_speed)    1800
+
+            # Temperature thresholds: {fan_speeds low_ac high_ac low_batt high_batt}
+            # These were tested on the I8000. If you have a different Dell laptop model
+            # you should check the BIOS temperature monitoring and set the appropriate
+            # thresholds here. In doubt start with low values and gradually rise them
+            # until the fans are not always on when the cpu is idle.
+            #set config(0)    {{0 0}  -1  60  -1  65}
+            #set config(1)    {{1 0}  50  70  55  75}
+            #set config(2)    {{1 1}  60  80  65  85}
+            #set config(3)    {{2 2}  70 128  75 128}
+
+            # Switch to state(1) on 55 celsius
+            set config(0) {{-1 0} -1 55 -1 55}
+            # Switch back to state(0) on 48 celsius
+            # Switch to state(2) on 75 celsius
+            set config(1) {{-1 1} 48 75 48 75}
+            # Switch back to state(1) on 60 celsius
+            set config(2) {{-1 2} 60 128 60 128}
+
+            # end of file
+            </code></pre>
+            После этого, утилиту надо ещё и включить)) К счастью это делается просто: В файлах
+            <pre><code>vim /etc/default/i8kmon vim /etc/default/i8kbuttons</code></pre>
+            Меняем параметр ENABLED=0 на ENABLED=1 После всех этих нехитрыx действий, запускаем утилиту
+            <pre><code>sudo service i8kmon start </code> </pre>
+            И наступает долгожданная тишина..... Можно посмотреть текущую температуру процессора коммандой sensors, для этого в системе должна быть установленна утилита lm-sensors Если её нет, ставим:
+            <pre><code>sudo apt-get install lm-sensors</code></pre>
+            Если всё прошло не так гладко, возможно поможет более хардкодовый вариант, который описан <a href="http://ubuntuforums.org/showthread.php?t=842775">здесь</a>.
+        author: alex@gmail.com
+        categories: [ubuntu, linux]
+    2:
+        name: Как запретить коммерческие предложения в Ubuntu 13.10?
+        body: |
+            Для того, чтобы отключить коммерческие предложения в Ubuntu 13.10, надо вышеописанным способом отключить следующие области поиска:
+            <ul>
+                <li>Amazon,</li>
+                <li>Ebay,</li>
+                <li>Music Store,</li>
+                <li>Popular Tracks Online,</li>
+                <li>Skimlinks,</li>
+                <li>Ubuntu One Music Search,</li>
+                <li>Ubuntu Shop.</li>
+            </ul>
+            Можно сделать это проще при помощи одной команды в терминале:
+            <pre><code>gsettings set com.canonical.Unity.Lenses disabled-scopes "['more_suggestions-amazon.scope', 'more_suggestions-u1ms.scope', 'more_suggestions-populartracks.scope', 'music-musicstore.scope', 'more_suggestions-ebay.scope', 'more_suggestions-ubuntushop.scope', 'more_suggestions-skimlinks.scope']"</code></pre>
+            После этого коммерческие предложения в Dash больше не будут вам досаждать.
         author: alex@gmail.com
         categories: [ubuntu, linux]

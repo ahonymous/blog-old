@@ -17,6 +17,10 @@
             <p>
                 {{ article.body|endsWord(200)|nl2p("blog-post-body")|raw }}
             </p>
+            <div class="blog-post-meta">
+                {% for category in article.categories %}
+                    {{ category }}&nbsp;
+                {% endfor %}</div>
             <hr>
             <a href="{{ path('article_show', { 'slug': article.slug }) }}">
                 Read more

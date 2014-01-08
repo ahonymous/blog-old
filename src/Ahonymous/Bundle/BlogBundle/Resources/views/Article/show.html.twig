@@ -12,6 +12,9 @@
     <p class="blog-post-meta">
         {{ article.created|date('d M Y') }}
     </p>
+    {% for category in article.categories %}
+        <strong>{{ category }}&nbsp;</strong>
+    {% endfor %}
     <hr>
     <p class="blog-post-meta">
         <a href="{{ path('article_edit', { 'slug': article.slug }) }}">
