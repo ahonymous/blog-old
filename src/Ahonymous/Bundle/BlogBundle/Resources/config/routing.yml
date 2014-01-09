@@ -3,19 +3,20 @@ _hello:
     type:     annotation
     prefix:   /
 
-home:
-    path:     /{page}
-    defaults: { _controller: AhonymousBlogBundle:Default:index, page: 1 }
+_search:
+    pattern:  /search/{page}
+    defaults: { _controller: "AhonymousBlogBundle:Default:search", page: 1 }
     requirements:
         page:  \d+
 
+
 about:
-    path:     /about
-    defaults: { _controller: AhonymousBlogBundle:Default:about }
+    pattern:  /about
+    defaults: { _controller: "AhonymousBlogBundle:Default:about" }
 
 guest:
-    path:     /guest
-    defaults: { _controller: AhonymousBlogBundle:Default:guest }
+    pattern:  /guest
+    defaults: { _controller: "AhonymousBlogBundle:Default:guest" }
 
 _article:
     resource: "@AhonymousBlogBundle/Resources/config/routing/article.yml"
@@ -29,4 +30,8 @@ article_show:
     pattern:  /article/{slug}
     defaults: { _controller: "AhonymousBlogBundle:Article:show" }
 
-
+home:
+    pattern:  /{page}
+    defaults: { _controller: "AhonymousBlogBundle:Default:index", page: 1 }
+    requirements:
+        page:  \d+

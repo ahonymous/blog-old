@@ -10,7 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Article
  *
- * @ORM\Table(name="article")
+ * @ORM\Table(name="article", indexes={
+ *      @ORM\Index(name="slug_index", columns={"slug"})
+ * })
  * @ORM\Entity(repositoryClass="Ahonymous\Bundle\BlogBundle\Entity\Repository\ArticleRepository")
  * @Gedmo\SoftDeleteable(fieldName="deleted")
  */
@@ -85,7 +87,7 @@ class Article
     private $categories;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $viewed;
 

@@ -23,7 +23,7 @@ class ArticleRepository extends EntityRepository
     public function findLastName($limit = 5)
     {
         $query = $this->getEntityManager()
-            ->createQuery('SELECT a.name, a.slug FROM AhonymousBlogBundle:Article a ORDER BY a.updated DESC')
+            ->createQuery('SELECT a.name, a.slug FROM AhonymousBlogBundle:Article a ORDER BY a.created DESC')
             ->setMaxResults($limit)
         ;
 
@@ -35,6 +35,16 @@ class ArticleRepository extends EntityRepository
         $query = $this->getEntityManager()
             ->createQuery('SELECT a.name, a.slug FROM AhonymousBlogBundle:Article a ORDER BY a.viewed DESC')
             ->setMaxResults($limit)
+        ;
+
+        return $query;
+    }
+
+    public function search($search)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('SELECT a FROM AhonymousBlogBundle:Article a WHERE a.slug LIKE ?1')
+            ->setParameter(1, '%'.$search.'%')
         ;
 
         return $query;

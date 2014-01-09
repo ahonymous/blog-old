@@ -1,7 +1,19 @@
 {% extends 'AhonymousBlogBundle::main.html.twig' %}
 
-{% block title %}About Me{% endblock title %}
+{% block title %}{{ article.name }}{% endblock title %}
 
-{% block content %}
-    {{ parent() }}
-{% endblock content %}
+{% block content -%}
+    <h1>{{ article.name }}</h1>
+
+    <p class="blog-post-body">
+        {{ article.body|nl2p("blog-post-body")|raw }}
+    </p>
+
+    <hr>
+    <p class="blog-post-meta">
+        <a href="{{ path('home') }}" >
+            Back to the list
+        </a>
+    </p>
+
+{% endblock %}

@@ -16,18 +16,18 @@ articles:
             <pre><code>sudo apt-get install i8kutils</code></pre>
             Далее создадим конфигурационный файл /etc/i8kmon.conf и внесём в него следуюущий конфиг:
             <pre><code>
-            # Sample i8kmon configuration file (/etc/i8kmon, ~/.i8kmon).
+             # Sample i8kmon configuration file (/etc/i8kmon, ~/.i8kmon).
 
-            # Kernel I8K status file
+             # Kernel I8K status file
             set config(proc_i8k)    /proc/i8k
 
-            # Kernel APM status file
+             # Kernel APM status file
             set config(proc_apm)    /proc/apm
 
-            # Kernel ACPI status file
+             # Kernel ACPI status file
             set config(proc_acpi)    /proc/acpi/ac_adapter/0/status
 
-            # External program to control the fans
+             # External program to control the fans
             set config(i8kfan)    /usr/bin/i8kfan
 
             # Applet geometry, override with --geometry option
