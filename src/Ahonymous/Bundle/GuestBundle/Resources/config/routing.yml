@@ -1,0 +1,11 @@
+guest:
+    path:     /{page}
+    defaults: { _controller: AhonymousGuestBundle:Guest:view, page: 1 }
+
+_single:
+    path:     /single/{id}
+    defaults: { _controller: AhonymousGuestBundle:Guest:single }
+
+_delete:
+    path:     /delete/{id}
+    defaults: { _controller: AhonymousGuestBundle:Guest:delete, id: null }
