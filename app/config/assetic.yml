@@ -34,6 +34,13 @@ assetic:
            filters:
                - yui_css
            output: css/blog.css
+        footer_css:
+           inputs:
+               - %kernel.root_dir%/../src/Ahonymous/Bundle/GuestBundle/Resources/public/css/footer.css
+           filters:
+               - cssrewrite
+               - yui_css
+           output: css/footer.css
         ie8:
            inputs:
                - %kernel.root_dir%/../vendor/twbs/bootstrap/docs/assets/js/ie8-responsive-file-warning.js

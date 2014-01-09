@@ -14,9 +14,9 @@ about:
     pattern:  /about
     defaults: { _controller: "AhonymousBlogBundle:Default:about" }
 
-guest:
-    pattern:  /guest
-    defaults: { _controller: "AhonymousBlogBundle:Default:guest" }
+#guest:
+#    pattern:  /guest
+#    defaults: { _controller: "AhonymousBlogBundle:Default:guest" }
 
 _article:
     resource: "@AhonymousBlogBundle/Resources/config/routing/article.yml"
