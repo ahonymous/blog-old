@@ -1,0 +1,6 @@
+<div class="sidebar-module sidebar-module-inset">
+    <h4>{{ name }}</h4>
+    {% for article in articles %}
+        <a href="{{ path( path_route, { 'slug': article.slug }) }}">{{ article.name }}</a><hr>
+    {% endfor %}
+</div>

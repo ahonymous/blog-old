@@ -4,6 +4,7 @@ namespace Ahonymous\Bundle\GuestBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Guest
@@ -64,6 +65,28 @@ class Guest
      * @ORM\Column(name="editedTime", type="datetime")
      */
     private $editedTime;
+
+    /**
+     * @Gedmo\Slug(fields={"name", "createdTime"})
+     * @ORM\Column(length=255, unique=true)
+     */
+    private $slug;
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 
     /**
      * @param string $editedTime

@@ -3,9 +3,9 @@ guest:
     defaults: { _controller: AhonymousGuestBundle:Guest:view, page: 1 }
 
 _single:
-    path:     /single/{id}
+    path:     /single/{slug}
     defaults: { _controller: AhonymousGuestBundle:Guest:single }
 
 _delete:
-    path:     /delete/{id}
+    path:     /delete/{slug}
     defaults: { _controller: AhonymousGuestBundle:Guest:delete, id: null }

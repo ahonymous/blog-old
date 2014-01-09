@@ -56,10 +56,10 @@ class GuestController extends Controller
     /**
      * @Template()
      */
-    public function singleAction($id)
+    public function singleAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
-        $guest = $em->getRepository('AhonymousGuestBundle:Guest')->findById($id);
+        $guest = $em->getRepository('AhonymousGuestBundle:Guest')->findBySlug($slug);
 
         return array(
             'guest' => $guest[0]
@@ -69,10 +69,10 @@ class GuestController extends Controller
     /**
      * @Template()
      */
-    public function deleteAction($id)
+    public function deleteAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
-        $guest = $em->getRepository('AhonymousGuestBundle:Guest')->find($id);
+        $guest = $em->getRepository('AhonymousGuestBundle:Guest')->findOneBy(array('slug' => $slug));
 
         if (!$guest) {
             throw $this->createNotFoundException('Unable to find Guest entity.');

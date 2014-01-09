@@ -12,9 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class GuestRepository extends EntityRepository
 {
-    public function findDESCGuests()
+    public function findDESCGuests($limit = null)
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT g FROM AhonymousGuestBundle:Guest g ORDER BY g.id DESC');
+            ->createQuery('SELECT g FROM AhonymousGuestBundle:Guest g ORDER BY g.id DESC')
+            ->setMaxResults($limit);
     }
 }

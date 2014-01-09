@@ -15,7 +15,7 @@
     <hr>
 
     <a class="btn btn-success" href="{{ path('guest') }}"><-Back to list</a>
-    <a class="btn btn-danger" href="{{ path('_delete', {'id': guest.id}) }}">Delete</a>
+    <a class="btn btn-danger" href="{{ path('_delete', {'slug': guest.slug}) }}">Delete</a>
 
 
 {% endblock content %}

@@ -67,8 +67,8 @@
                 {#<b>ID:</b> {{ guest.id }}#}
                 <b>Name:</b> {{ guest.name }}
                 <b>E-mail:</b> {{ guest.email }}
-                <a class="btn btn-success" href="{{ path('_single', {'id': guest.id}) }}">View</a>
-                <a class="btn btn-danger" href="{{ path('_delete', {'id': guest.id}) }}">Delete</a>
+                <a class="btn btn-success" href="{{ path('_single', {'slug': guest.slug}) }}">View</a>
+                <a class="btn btn-danger" href="{{ path('_delete', {'slug': guest.slug}) }}">Delete</a>
             </p>
             {{ guest.message | truncate(20) }}
         {% endfor %}

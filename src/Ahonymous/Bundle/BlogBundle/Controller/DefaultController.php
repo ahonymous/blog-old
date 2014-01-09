@@ -3,6 +3,7 @@
 namespace Ahonymous\Bundle\BlogBundle\Controller;
 
 use Ahonymous\Bundle\BlogBundle\Entity\Article;
+use Ahonymous\Bundle\GuestBundle\Entity\Guest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Pagerfanta\Exception\NotValidCurrentPageException;
@@ -52,18 +53,22 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Template()
+     * @Template("AhonymousBlogBundle::sidebar.html.twig")
      */
     public function sidebarMostViewedArticlesAction()
     {
         $em = $this->getDoctrine()->getManager();
         $queryMostViewed = $em->getRepository('AhonymousBlogBundle:Article')->findMostViewedName(2);
 
-        return array('sidebar_most_viewed' => $queryMostViewed->getResult());
+        return array(
+            'articles' => $queryMostViewed->getResult(),
+            'name' => 'Most Viewed Articles',
+            'path_route' => 'article_show'
+        );
     }
 
     /**
-     * @Template()
+     * @Template("AhonymousBlogBundle::sidebar.html.twig")
      */
     public function sidebarLastArticlesAction()
     {
@@ -72,7 +77,19 @@ class DefaultController extends Controller
         $queryLastName = $em->getRepository('AhonymousBlogBundle:Article')->findLastName(2);
         $sidebar_last = $queryLastName->getResult();
 
-        return array('sidebar_last' => $sidebar_last);
+        return array('articles' => $sidebar_last, 'name' => 'Last Articles', 'path_route' => 'article_show');
+    }
+
+    /**
+     * @Template("AhonymousBlogBundle::sidebar.html.twig")
+     */
+    public function sidebarLastGuestsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $sidebarQuery = $em->getRepository("AhonymousGuestBundle:Guest")->findDESCGuests(2);
+        $sidebar = $sidebarQuery->getResult();
+
+        return array('articles' => $sidebar, 'name' => 'Last Guests', 'path_route' => '_single');
     }
 
     public function searchAction(Request $request, $page)
