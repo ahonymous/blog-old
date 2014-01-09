@@ -3,9 +3,13 @@
 {% block title %}Guest{% endblock %}
 
 {% block header %}
-    <div class="pagerfanta">
-        {{ pagerfanta(guests, 'twitter_bootstrap3') }}
-    </div>
+    <header>
+        <div class="container">
+            <div class="pagerfanta">
+                {{ pagerfanta(guests, 'twitter_bootstrap3') }}
+            </div>
+        </div>
+    </header>
 {% endblock header %}
 
 {% block content %}

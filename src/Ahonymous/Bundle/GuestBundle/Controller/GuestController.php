@@ -4,9 +4,11 @@ namespace Ahonymous\Bundle\GuestBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Ahonymous\Bundle\GuestBundle\Entity\Guest;
 use Ahonymous\Bundle\GuestBundle\Form\GuestType;
+use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 
