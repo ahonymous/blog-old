@@ -5,7 +5,7 @@ require_once __DIR__.'/base_script.php';
 build_bootstrap();
 
 show_run("Changing permissions", "chmod -R 777 app/cache app/logs web/");
-//show_run("database:drop", "app/console doctrine:database:drop --force");
+show_run("database:drop", "app/console doctrine:database:drop --force");
 show_run("database:create", "app/console doctrine:database:create");
 //show_run("generate:entities", "app/console doctrine:generate:entities Ahonymous");
 show_run("schema:update", "app/console doctrine:schema:update --force");
