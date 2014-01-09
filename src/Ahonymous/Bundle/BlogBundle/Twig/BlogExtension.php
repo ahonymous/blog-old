@@ -25,7 +25,7 @@ class BlogExtension extends \Twig_Extension
         $back_str = '';
 
         foreach (explode("\n", $str) as $pTag) {
-            if(trim($pTag)) {
+            if (trim($pTag)) {
                 $back_str .= "<p class=".$attribute.">$pTag</p>";
             }
         }
@@ -35,16 +35,15 @@ class BlogExtension extends \Twig_Extension
 
     public function endsWord($str, $length = 40)
     {
-        if (strlen($str) < $length){
+        if (strlen($str) < $length) {
             return $str;
         }
 
-        if (!is_null($str)){
+        if (!is_null($str)) {
             $close = explode(' ', $str);
             $come = '';
             $i = 0;
-            while (strlen($come) < $length)
-            {
+            while (strlen($come) < $length) {
                 $come .= ' ' . $close[$i++];
             }
 

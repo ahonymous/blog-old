@@ -23,7 +23,7 @@ class LoadArticleData extends AbstractFixture implements FixtureInterface
      *
      * @param ObjectManager $manager
      */
-    function load(ObjectManager $manager)
+    public function load(ObjectManager $manager)
     {
         $articles = Yaml::parse($this->getYmlFile());
 

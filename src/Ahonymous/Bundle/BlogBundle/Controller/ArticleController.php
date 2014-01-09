@@ -37,7 +37,6 @@ class ArticleController extends Controller
     {
         $article = new Article();
 
-
         $form = $this->createCreateForm($article);
         $form->handleRequest($request);
 
@@ -121,7 +120,6 @@ class ArticleController extends Controller
         $em->flush();
 
         $deleteForm = $this->createDeleteForm($slug);
-
 
         return $this->render('AhonymousBlogBundle:Article:show.html.twig', array(
             'article'      => $article,

@@ -62,7 +62,7 @@ class Category
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -79,7 +79,7 @@ class Category
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string   $name
      * @return Category
      */
     public function setName($name)
@@ -92,7 +92,7 @@ class Category
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -102,7 +102,7 @@ class Category
     /**
      * Set created
      *
-     * @param \DateTime $created
+     * @param  \DateTime $created
      * @return Category
      */
     public function setCreated($created)
@@ -115,7 +115,7 @@ class Category
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -125,7 +125,7 @@ class Category
     /**
      * Set deleted
      *
-     * @param \DateTime $deleted
+     * @param  \DateTime $deleted
      * @return Category
      */
     public function setDeleted($deleted)
@@ -138,7 +138,7 @@ class Category
     /**
      * Get deleted
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDeleted()
     {
@@ -148,7 +148,7 @@ class Category
     /**
      * Add article
      *
-     * @param Article $article
+     * @param  Article  $article
      * @return Category
      */
     public function addArticle(Article $article)
@@ -171,7 +171,7 @@ class Category
     /**
      * Get articles
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getArticles()
     {

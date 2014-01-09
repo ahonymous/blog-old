@@ -10,7 +10,7 @@ class ArticleType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -20,7 +20,7 @@ class ArticleType extends AbstractType
             ->add('author', 'email')
             ->add('categories');
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

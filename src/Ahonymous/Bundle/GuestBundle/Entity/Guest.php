@@ -105,7 +105,7 @@ class Guest
         return $this->editedTime;
     }
 
-    function __construct(\DateTime $createdTime)
+    public function __construct(\DateTime $createdTime)
     {
         $this->createdTime = $createdTime;
     }

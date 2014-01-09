@@ -20,7 +20,7 @@ class LoadCategoryData extends AbstractFixture implements FixtureInterface
      *
      * @param ObjectManager $manager
      */
-    function load(ObjectManager $manager)
+    public function load(ObjectManager $manager)
     {
         foreach ($this->getCategoryArray() as $category) {
             $categoryObject = new Category();

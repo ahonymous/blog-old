@@ -94,7 +94,7 @@ class Article
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -111,7 +111,7 @@ class Article
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string  $name
      * @return Article
      */
     public function setName($name)
@@ -124,7 +124,7 @@ class Article
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -134,7 +134,7 @@ class Article
     /**
      * Set body
      *
-     * @param string $body
+     * @param  string  $body
      * @return Article
      */
     public function setBody($body)
@@ -147,7 +147,7 @@ class Article
     /**
      * Get body
      *
-     * @return string 
+     * @return string
      */
     public function getBody()
     {
@@ -157,7 +157,7 @@ class Article
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string  $slug
      * @return Article
      */
     public function setSlug($slug)
@@ -170,7 +170,7 @@ class Article
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -180,7 +180,7 @@ class Article
     /**
      * Set created
      *
-     * @param \DateTime $created
+     * @param  \DateTime $created
      * @return Article
      */
     public function setCreated($created)
@@ -193,7 +193,7 @@ class Article
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -203,7 +203,7 @@ class Article
     /**
      * Set updated
      *
-     * @param \DateTime $updated
+     * @param  \DateTime $updated
      * @return Article
      */
     public function setUpdated($updated)
@@ -216,7 +216,7 @@ class Article
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdated()
     {
@@ -226,7 +226,7 @@ class Article
     /**
      * Set deleted
      *
-     * @param \DateTime $deleted
+     * @param  \DateTime $deleted
      * @return Article
      */
     public function setDeleted($deleted)
@@ -239,7 +239,7 @@ class Article
     /**
      * Get deleted
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDeleted()
     {
@@ -265,7 +265,7 @@ class Article
     /**
      * Add categories
      *
-     * @param Category $category
+     * @param  Category $category
      * @return Article
      */
     public function addCategory(Category $category)
@@ -288,7 +288,7 @@ class Article
     /**
      * Get categories
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCategories()
     {
