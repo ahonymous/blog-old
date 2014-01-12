@@ -34,7 +34,7 @@ class DefaultController extends Controller
      */
     public function aboutAction()
     {
-        $about = Yaml::parse(__DIR__ . '/../DataFixtures/ORM/Data/aboute.yml');
+        $about = Yaml::parse(__DIR__ . '/../DataFixtures/ORM/Data/about.yml');
         $articleObject = new Article();
         $articleObject
             ->setName($about['about']['name'])
