@@ -1,9 +1,10 @@
 {% extends 'AhonymousBlogBundle::main.html.twig' %}
 
 {% block content -%}
-    <h1>Article list</h1>
+    <div class="blog-post">
+        <h1 class="blog-title">Article list</h1>
 
-    <table class="records_list">
+        <table class="records_list">
         <thead>
             <tr>
                 <th>Id</th>
@@ -42,10 +43,11 @@
     </table>
 
         <ul>
-        <li>
-            <a href="{{ path('article_new') }}">
-                Create a new article.
-            </a>
-        </li>
-    </ul>
+            <li>
+                <a href="{{ path('article_new') }}">
+                    Create a new article.
+                </a>
+            </li>
+        </ul>
+    </div>
     {% endblock %}

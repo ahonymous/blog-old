@@ -3,7 +3,6 @@
 namespace Ahonymous\Bundle\BlogBundle\Controller;
 
 use Ahonymous\Bundle\BlogBundle\Entity\Article;
-use Ahonymous\Bundle\GuestBundle\Entity\Guest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Pagerfanta\Exception\NotValidCurrentPageException;
@@ -26,7 +25,7 @@ class DefaultController extends Controller
 
         $adapter = new DoctrineORMAdapter($query);
 
-        return array('articles' => $this->getPagerfanta($adapter, $page));
+        return array('articles' => $this->getPagerfanta($adapter, $page, 2));
     }
 
     /**
@@ -42,14 +41,6 @@ class DefaultController extends Controller
         ;
 
         return array('article'=>$articleObject);
-    }
-
-    /**
-     * @Template()
-     */
-    public function guestAction()
-    {
-        return array();
     }
 
     /**
@@ -74,10 +65,13 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $queryLastName = $em->getRepository('AhonymousBlogBundle:Article')->findLastName(2);
-        $sidebar_last = $queryLastName->getResult();
+        $queryLastArticles = $em->getRepository('AhonymousBlogBundle:Article')->findLastName(2);
 
-        return array('articles' => $sidebar_last, 'name' => 'Last Articles', 'path_route' => 'article_show');
+        return array(
+            'articles' => $queryLastArticles->getResult(),
+            'name' => 'Last Articles',
+            'path_route' => 'article_show'
+        );
     }
 
     /**
@@ -87,9 +81,12 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $sidebarQuery = $em->getRepository("AhonymousGuestBundle:Guest")->findDESCGuests(2);
-        $sidebar = $sidebarQuery->getResult();
 
-        return array('articles' => $sidebar, 'name' => 'Last Guests', 'path_route' => '_single');
+        return array(
+            'articles' => $sidebarQuery->getResult(),
+            'name' => 'Last Guests',
+            'path_route' => '_single'
+        );
     }
 
     public function searchAction(Request $request, $page)
@@ -119,10 +116,10 @@ class DefaultController extends Controller
 //        return $this->render('AhonymousBlogBundle:Default:index.html.twig', array('articles' => $searchedQuery));
     }
 
-    protected function getPagerfanta($adapter, $page = 1)
+    protected function getPagerfanta($adapter, $page = 1, $maxPerPage = 2)
     {
         $pager = new Pagerfanta($adapter);
-        $pager->setMaxPerPage(2);
+        $pager->setMaxPerPage($maxPerPage);
 
         try {
             $pager->setCurrentPage($page);

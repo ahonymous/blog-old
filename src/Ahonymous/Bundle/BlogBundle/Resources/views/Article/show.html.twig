@@ -3,27 +3,28 @@
 {% block title %}{{ article.name }}{% endblock title %}
 
 {% block content -%}
-    <h1>{{ article.name }}</h1>
+    <div class="blog-post">
+        <h1 class="blog-title">{{ article.name }}1</h1>
 
-    <p class="blog-post-body">
-            {{ article.body|nl2p("blog-post-body")|raw }}
-    </p>
+        <p class="blog-post-body">
+                {{ article.body|nl2p("blog-post-body")|raw }}
+        </p>
 
-    <p class="blog-post-meta">
-        {{ article.created|date('d M Y') }}
-    </p>
-    {% for category in article.categories %}
-        <strong>{{ category }}&nbsp;</strong>
-    {% endfor %}
-    <hr>
-    <p class="blog-post-meta">
-        <a href="{{ path('article_edit', { 'slug': article.slug }) }}">
-            Edit
-        </a>&nbsp;&nbsp;&nbsp;
-        <a href="{{ path('home') }}" >
-            Back to the list
-        </a>
-        {{ form(delete_form) }}
-    </p>
-
+        <p class="blog-post-meta">
+            {{ article.created|date('d M Y') }}
+        </p>
+        {% for category in article.categories %}
+            <strong>{{ category }}&nbsp;</strong>
+        {% endfor %}
+        <hr>
+        <p class="blog-post-meta">
+            <a href="{{ path('article_edit', { 'slug': article.slug }) }}">
+                Edit
+            </a>&nbsp;&nbsp;&nbsp;
+            <a href="{{ path('home') }}" >
+                Back to the list
+            </a>
+            {{ form(delete_form) }}
+        </p>
+    </div>
 {% endblock %}

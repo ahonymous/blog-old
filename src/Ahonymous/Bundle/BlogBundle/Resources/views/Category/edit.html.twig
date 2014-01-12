@@ -1,16 +1,18 @@
 {% extends 'AhonymousBlogBundle::main.html.twig' %}
 
 {% block content -%}
-    <h1>Category edit</h1>
+    <div class="blog-post">
+        <h1 class="blog-title">Category edit</h1>
 
-    {{ form(edit_form) }}
+        {{ form(edit_form) }}
 
         <ul class="record_actions">
-    <li>
-        <a href="{{ path('category') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+            <li>
+                <a href="{{ path('category') }}">
+                    Back to the list
+                </a>
+            </li>
+            <li>{{ form(delete_form) }}</li>
+        </ul>
+    </div>
 {% endblock %}
