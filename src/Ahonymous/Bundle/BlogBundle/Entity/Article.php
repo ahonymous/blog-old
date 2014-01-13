@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="article", indexes={
  *      @ORM\Index(name="slug_index", columns={"slug"})
  * })
- * @ORM\Entity(repositoryClass="Ahonymous\Bundle\BlogBundle\Entity\Repository\ArticleRepository")
+ * @ORM\Entity(repositoryClass="Ahonymous\Bundle\BlogBundle\Repository\ArticleRepository")
  * @Gedmo\SoftDeleteable(fieldName="deleted")
  */
 class Article

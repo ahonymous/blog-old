@@ -1,6 +1,6 @@
 <?php
 
-namespace Ahonymous\Bundle\BlogBundle\Entity\Repository;
+namespace Ahonymous\Bundle\BlogBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -43,7 +43,7 @@ class ArticleRepository extends EntityRepository
     public function search($search)
     {
         $query = $this->getEntityManager()
-            ->createQuery('SELECT a FROM AhonymousBlogBundle:Article a WHERE a.slug LIKE ?1')
+            ->createQuery('SELECT a FROM AhonymousBlogBundle:Article a WHERE a.name LIKE ?1')
             ->setParameter(1, '%'.$search.'%')
         ;
 

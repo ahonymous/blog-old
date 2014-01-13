@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Category
  *
  * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="Ahonymous\Bundle\BlogBundle\Entity\Repository\CategoryRepository")
+ * @ORM\Entity(repositoryClass="Ahonymous\Bundle\BlogBundle\Repository\CategoryRepository")
  * @Gedmo\SoftDeleteable(fieldName="deleted")
  */
 class Category
