@@ -3,6 +3,7 @@
 {% block title %}{{ article.name }}{% endblock title %}
 
 {% block content -%}
+    {{ parent() }}
     <div class="blog-post">
         <h1 class="blog-title">{{ article.name }}</h1>
 

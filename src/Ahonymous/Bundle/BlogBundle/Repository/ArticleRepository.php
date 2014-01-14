@@ -42,27 +42,15 @@ class ArticleRepository extends EntityRepository
 
     public function search($search)
     {
-        $query = $this->getEntityManager()
-            ->createQuery('SELECT a FROM AhonymousBlogBundle:Article a WHERE a.body LIKE :search');
+        $query = $this->getEntityManager()->createQueryBuilder();
+        $query->select('a')
+            ->from('AhonymousBlogBundle:Article', 'a');
 
-        if (is_array($search)) {
-            $query->setParameter('search', '%'.implode('%, %', $search).'%');
-        } else {
-            $query->setParameter('search', '%'.$search.'%');
+        foreach ($search as $itemValue) {
+            $query->orWhere('a.name LIKE \'%'.$itemValue.'%\'')
+                ->orWhere('a.body LIKE \'%'.$itemValue.'%\'');
         }
 
-        return $query;
-    }
-
-    private function arrayToString($array = array())
-    {
-        foreach ($array as $value)
-            if (is_array($value)) {
-                $this->arrayToString($value);
-            } else {
-                $valueBack[] = $value;
-            }
-
-        return $valueBack;
+        return $query->getQuery();
     }
 }

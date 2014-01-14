@@ -22,6 +22,8 @@ class ArticleController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Articles", $this->get("router")->generate("article"));
 
         $articles = $em->getRepository('AhonymousBlogBundle:Article')->findAll();
 
@@ -88,6 +90,9 @@ class ArticleController extends Controller
     public function newAction()
     {
         $article = new Article();
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Article", $this->get("router")->generate("article"));
+        $breadcrumbs->addItem("New article", $this->get("router")->generate("article_new"));
 
         $form   = $this->createCreateForm($article);
 
@@ -107,6 +112,8 @@ class ArticleController extends Controller
     public function showAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("home"));
 
         $article = $em
             ->getRepository('AhonymousBlogBundle:Article')
@@ -118,6 +125,7 @@ class ArticleController extends Controller
 
         $article->setViewed($article->getViewed()+1);
         $em->flush();
+        $breadcrumbs->addItem($article->getName(), $this->get("router")->generate("_single", array('slug' => $slug)));
 
         $deleteForm = $this->createDeleteForm($slug);
 
@@ -134,6 +142,9 @@ class ArticleController extends Controller
     public function editAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Article", $this->get("router")->generate("article"));
+        $breadcrumbs->addItem("Edit article", $this->get("router")->generate("article_edit", array('slug' => $slug)));
 
         $article = $em->getRepository('AhonymousBlogBundle:Article')->findOneBy(array('slug' => $slug));
 
@@ -178,6 +189,7 @@ class ArticleController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $article = $em->getRepository('AhonymousBlogBundle:Article')->findOneBy(array('slug' => $slug));
+        $id = $article->getId();
 
         if (!$article) {
             throw $this->createNotFoundException('Unable to find Article entity.');
@@ -189,8 +201,9 @@ class ArticleController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
+            $updatedArticle = $em->getRepository('AhonymousBlogBundle:Article')->findOneBy(array('id' => $id));
 
-            return $this->redirect($this->generateUrl('article_show', array('slug' => $slug)));
+            return $this->redirect($this->generateUrl('article_show', array('slug' => $updatedArticle->getSlug())));
         }
 
         return $this->render('AhonymousBlogBundle:Article:edit.html.twig', array(

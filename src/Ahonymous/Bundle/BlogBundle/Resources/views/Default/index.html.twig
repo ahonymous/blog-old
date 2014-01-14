@@ -3,6 +3,7 @@
 {% block title %}{{ title|default('TITLE') }}{% endblock title %}
 
 {% block content %}
+    {{ parent() }}
     <div>
         {% if (app.request.attributes.get('_route') == '_find') %}
             <div class="blog-post alert alert-info">
@@ -41,6 +42,6 @@
         <div class="pagination pagination-centered">
             {{ pagerfanta(articles, 'twitter_bootstrap3') }}
         </div>
-        <p>{{ articles|length }}</p>
+        {#<p>{{ articles|length }}</p>#}
     </div>
 {% endblock content %}

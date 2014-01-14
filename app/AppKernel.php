@@ -20,8 +20,8 @@ class AppKernel extends Kernel
             new Ahonymous\Bundle\GuestBundle\AhonymousGuestBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

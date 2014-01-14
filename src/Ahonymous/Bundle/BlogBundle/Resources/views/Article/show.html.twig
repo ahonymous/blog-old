@@ -3,8 +3,9 @@
 {% block title %}{{ article.name }}{% endblock title %}
 
 {% block content -%}
+    {{ parent() }}
     <div class="blog-post">
-        <h1 class="blog-title">{{ article.name }}1</h1>
+        <h1 class="blog-title">{{ article.name }}</h1>
 
         <p class="blog-post-body">
                 {{ article.body|nl2p("blog-post-body")|raw }}

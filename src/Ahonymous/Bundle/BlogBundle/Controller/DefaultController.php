@@ -20,6 +20,8 @@ class DefaultController extends Controller
     public function indexAction($page = 1)
     {
         $em = $this->getDoctrine()->getManager();
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("home"));
 
         $query = $em->getRepository('AhonymousBlogBundle:Article')
             ->findAllArticles();
@@ -41,6 +43,8 @@ class DefaultController extends Controller
             ->setName($about['about']['name'])
             ->setBody($about['about']['body'])
         ;
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem($articleObject->getName(), $this->get("router")->generate("about"));
 
         return array('article'=>$articleObject);
     }
@@ -85,7 +89,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $sidebarQuery = $em->getRepository("AhonymousGuestBundle:Guest")
-            ->findDESCGuests(2);
+            ->toSidebarGuest(2);
 
         return array(
             'articles' => $sidebarQuery,
