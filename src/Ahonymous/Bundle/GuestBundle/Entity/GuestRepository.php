@@ -16,6 +16,7 @@ class GuestRepository extends EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery('SELECT g FROM AhonymousGuestBundle:Guest g ORDER BY g.id DESC')
-            ->setMaxResults($limit);
+            ->setMaxResults($limit)
+            ->getResult();
     }
 }

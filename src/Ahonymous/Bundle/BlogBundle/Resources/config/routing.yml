@@ -4,8 +4,12 @@ _hello:
     prefix:   /
 
 _search:
-    pattern:  /search/{page}
-    defaults: { _controller: "AhonymousBlogBundle:Default:search", page: 1 }
+    pattern:  /search
+    defaults: { _controller: "AhonymousBlogBundle:Default:search" }
+
+_find:
+    pattern:  /find/{searched}/{page}
+    defaults: { _controller: "AhonymousBlogBundle:Default:find", searched: '', page: 1 }
     requirements:
         page:  \d+
 

@@ -1,33 +1,44 @@
 {% extends 'AhonymousBlogBundle::main.html.twig' %}
 
 {% block content -%}
-    <div class="blog-post">
+    <div class="blog-post" xmlns="http://www.w3.org/1999/html">
         <h1 class="blog-title">Article edit</h1>
 
-        {#{{ form(edit_form, { 'attr': {'class': 'form'}}) }}#}
-        {{ form_start(edit_form) }}
-            {{ form_label(edit_form.name) }}
-            {{ form_widget(edit_form.name, { 'attr': {'class': 'form'}}) }}
 
-            {{ form_label(edit_form.body) }}
-            {{ form_widget(edit_form.body, { 'attr': {'class': 'form'}}) }}
+        {{ form_start(edit_form, { 'attr': { 'class': 'form-group'}}) }}
+        <div class="input-group">
+            <span class="input-group-addon">{{ form_label(edit_form.name) }}</span>
+            {{ form_widget(edit_form.name, { 'attr': {'class': 'form-control input-lg'}}) }}
+        </div>
+        </p>
+        <div class="input-group">
+            <label class="">{{ form_label(edit_form.body) }}</label></p>
+            {{ form_widget(edit_form.body, { 'attr': {'class': 'input-block-level'}}) }}
+        </div>
+        {#{{ form_label(edit_form.body) }}#}
+        {#{{ form_widget(edit_form.body) }}#}
+        </p>
+        <div class="input-group">
+            <span class="input-group-addon">{{ form_label(edit_form.author) }}</span>
+            {{ form_widget(edit_form.author, { 'attr': {'class': 'form-control'}}) }}
+        </div>
+        </p>
+        <div class="input-group">
+            <span class="input-group-addon">{{ form_label(edit_form.categories) }}</span>
+            {{ form_widget(edit_form.categories, { 'attr': {'class': 'form-control'}}) }}
+        </div>
+        </p>
 
-            {{ form_label(edit_form.author) }}
-            {{ form_widget(edit_form.author, { 'attr': {'class': 'form'}}) }}
-
-            {{ form_label(edit_form.categories) }}
-            {{ form_widget(edit_form.categories, { 'attr': {'class': 'form'}}) }}
+        {{ form_widget(edit_form.submit, { 'attr': { 'class': 'btn btn-info'}}) }}
 
         {{ form_end(edit_form) }}
 
-
-        <ul class="record_actions">
-            <li>
+        <div>
                 <a href="{{ path('home') }}">
                     Back to the list
                 </a>
-            </li>
-            <li>{{ form(delete_form) }}</li>
-        </ul>
+
+            {{ form(delete_form) }}
+        </div>
     </div>
 {% endblock %}

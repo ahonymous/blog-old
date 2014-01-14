@@ -21,11 +21,13 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $query = $em->getRepository('AhonymousBlogBundle:Article')->findAllArticles();
+        $query = $em->getRepository('AhonymousBlogBundle:Article')
+            ->findAllArticles();
 
         $adapter = new DoctrineORMAdapter($query);
+        $toRender = $this->getPagerfanta($adapter, $page, 2);
 
-        return array('articles' => $this->getPagerfanta($adapter, $page, 2));
+        return array('articles' => $toRender, 'title' => 'Home');
     }
 
     /**
@@ -49,10 +51,11 @@ class DefaultController extends Controller
     public function sidebarMostViewedArticlesAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $queryMostViewed = $em->getRepository('AhonymousBlogBundle:Article')->findMostViewedName(2);
+        $queryMostViewed = $em->getRepository('AhonymousBlogBundle:Article')
+            ->findMostViewedName(2);
 
         return array(
-            'articles' => $queryMostViewed->getResult(),
+            'articles' => $queryMostViewed,
             'name' => 'Most Viewed Articles',
             'path_route' => 'article_show'
         );
@@ -65,10 +68,11 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $queryLastArticles = $em->getRepository('AhonymousBlogBundle:Article')->findLastName(2);
+        $queryLastArticles = $em->getRepository('AhonymousBlogBundle:Article')
+            ->findLastName(2);
 
         return array(
-            'articles' => $queryLastArticles->getResult(),
+            'articles' => $queryLastArticles,
             'name' => 'Last Articles',
             'path_route' => 'article_show'
         );
@@ -80,40 +84,54 @@ class DefaultController extends Controller
     public function sidebarLastGuestsAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $sidebarQuery = $em->getRepository("AhonymousGuestBundle:Guest")->findDESCGuests(2);
+        $sidebarQuery = $em->getRepository("AhonymousGuestBundle:Guest")
+            ->findDESCGuests(2);
 
         return array(
-            'articles' => $sidebarQuery->getResult(),
+            'articles' => $sidebarQuery,
             'name' => 'Last Guests',
             'path_route' => '_single'
         );
     }
 
-    public function searchAction(Request $request, $page)
+    public function searchAction(Request $request)
     {
         $mySearchRequest = $request->createFromGlobals();
         $searchString = trim($mySearchRequest->request->get('search'));
-        $em = $this->getDoctrine()->getManager();
 
         if (strlen($searchString) == 0) {
             return $this->redirect($this->generateUrl('home'));
+        } else {
+            return $this->redirect($this->generateUrl(
+                    '_find',
+                    array('searched' => $searchString)
+                )
+            );
         }
+    }
 
-        $searchArray = array_map('trim', explode(' ',$searchString));
+    public function findAction($searched, $page)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $searchArray = array_map('trim', explode(' ',$searched));
         $searchArray = array_map('strtolower', $searchArray);
         $searchArray = array_unique($searchArray);
 
-        var_dump($searchArray);
+        $query = $em->getRepository('AhonymousBlogBundle:Article')
+            ->search($searchArray);
 
-        foreach ($searchArray as $searchWord) {
-            var_dump($searchWord);
-            $s = $em->getRepository('AhonymousBlogBundle:Article')->search($searchWord);
-            $searchedQuery[]= $s->getResult();
-        }
-        var_dump($searchedQuery);
-//        var_dump(array_map( 'unserialize', array_unique( array_map( 'serialize', $searchedQuery ) ) ));
+        $adapter = new DoctrineORMAdapter($query);
+        $toRender = $this->getPagerfanta($adapter, $page, 3);
 
-//        return $this->render('AhonymousBlogBundle:Default:index.html.twig', array('articles' => $searchedQuery));
+        return $this->render(
+            'AhonymousBlogBundle:Default:index.html.twig',
+            array(
+                'articles' => $toRender,
+                'title' => 'Searched ',
+                'searcher' => $searched
+            )
+        );
     }
 
     protected function getPagerfanta($adapter, $page = 1, $maxPerPage = 2)

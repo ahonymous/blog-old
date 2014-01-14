@@ -27,7 +27,7 @@ class ArticleRepository extends EntityRepository
             ->setMaxResults($limit)
         ;
 
-        return $query;
+        return $query->getResult();
     }
 
     public function findMostViewedName($limit = 5)
@@ -37,16 +37,32 @@ class ArticleRepository extends EntityRepository
             ->setMaxResults($limit)
         ;
 
-        return $query;
+        return $query->getResult();
     }
 
     public function search($search)
     {
         $query = $this->getEntityManager()
-            ->createQuery('SELECT a FROM AhonymousBlogBundle:Article a WHERE a.name LIKE ?1')
-            ->setParameter(1, '%'.$search.'%')
-        ;
+            ->createQuery('SELECT a FROM AhonymousBlogBundle:Article a WHERE a.body LIKE :search');
+
+        if (is_array($search)) {
+            $query->setParameter('search', '%'.implode('%, %', $search).'%');
+        } else {
+            $query->setParameter('search', '%'.$search.'%');
+        }
 
         return $query;
+    }
+
+    private function arrayToString($array = array())
+    {
+        foreach ($array as $value)
+            if (is_array($value)) {
+                $this->arrayToString($value);
+            } else {
+                $valueBack[] = $value;
+            }
+
+        return $valueBack;
     }
 }
