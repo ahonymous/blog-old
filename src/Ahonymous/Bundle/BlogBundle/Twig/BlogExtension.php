@@ -26,7 +26,7 @@ class BlogExtension extends \Twig_Extension
 
         foreach (explode("\n", $str) as $pTag) {
             if (trim($pTag)) {
-                $back_str .= "<p class=".$attribute.">$pTag</p>";
+                $back_str .= "<p class=".$attribute.">".$pTag."</p>";
             }
         }
 
@@ -51,14 +51,15 @@ class BlogExtension extends \Twig_Extension
                 $comeArray[] = $close[$i++];
             }
 
-            $tag = (isset($comeTag)) ? array_pop($comeTag) : null ;
+            $tag = (isset($comeTag)) ? array_pop($comeTag) : null;
             $come .= '...';
             $come .= (!is_null($tag)) ? "</".$tag[1].">": null;
-
-            return $come;
+        } else {
+            $come = null;
         }
-    }
 
+        return $come;
+    }
 
     public function getName()
     {
