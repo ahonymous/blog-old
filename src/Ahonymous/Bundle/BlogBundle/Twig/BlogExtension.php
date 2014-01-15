@@ -58,7 +58,7 @@ class BlogExtension extends \Twig_Extension
             $come = null;
         }
 
-        return $come;
+        return trim($come);
     }
 
     public function getName()
