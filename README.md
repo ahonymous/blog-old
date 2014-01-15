@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/ahonymous/blog.png?branch=blog)](https://travis-ci.org/ahonymous/blog)
