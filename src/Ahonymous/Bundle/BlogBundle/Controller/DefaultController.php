@@ -44,7 +44,10 @@ class DefaultController extends Controller
             ->setBody($about['about']['body'])
         ;
         $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem($articleObject->getName(), $this->get("router")->generate("about"));
+        $breadcrumbs->addItem(
+            $articleObject->getName(),
+            $this->get("router")->generate("about")
+        );
 
         return array('article'=>$articleObject);
     }

@@ -23,13 +23,20 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem("Articles", $this->get("router")->generate("article"));
+        $breadcrumbs->addItem(
+            "Articles",
+            $this->get("router")->generate("article")
+        );
 
-        $articles = $em->getRepository('AhonymousBlogBundle:Article')->findAll();
+        $articles = $em->getRepository('AhonymousBlogBundle:Article')
+            ->findAll();
 
-        return $this->render('AhonymousBlogBundle:Article:index.html.twig', array(
-            'articles' => $articles,
-        ));
+        return $this->render(
+            'AhonymousBlogBundle:Article:index.html.twig',
+            array(
+                'articles' => $articles,
+            )
+        );
     }
     /**
      * Creates a new Article entity.
@@ -91,8 +98,14 @@ class ArticleController extends Controller
     {
         $article = new Article();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem("Article", $this->get("router")->generate("article"));
-        $breadcrumbs->addItem("New article", $this->get("router")->generate("article_new"));
+        $breadcrumbs->addItem(
+            "Article",
+            $this->get("router")->generate("article")
+        );
+        $breadcrumbs->addItem(
+            "New article",
+            $this->get("router")->generate("article_new")
+        );
 
         $form   = $this->createCreateForm($article);
 
@@ -113,26 +126,38 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem("Home", $this->get("router")->generate("home"));
+        $breadcrumbs->addItem(
+            "Home",
+            $this->get("router")->generate("home")
+        );
 
         $article = $em
             ->getRepository('AhonymousBlogBundle:Article')
             ->findOneBy(array('slug' => $slug));
 
         if (!$article) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
+            throw $this->createNotFoundException(
+                'Unable to find Article entity.'
+            );
         }
 
         $article->setViewed($article->getViewed()+1);
         $em->flush();
-        $breadcrumbs->addItem($article->getName(), $this->get("router")->generate("_single", array('slug' => $slug)));
+        $breadcrumbs->addItem(
+            $article->getName(),
+            $this->get("router")
+                ->generate("_single", array('slug' => $slug))
+        );
 
         $deleteForm = $this->createDeleteForm($slug);
 
-        return $this->render('AhonymousBlogBundle:Article:show.html.twig', array(
-            'article'      => $article,
-            'delete_form' => $deleteForm->createView(),
-            ));
+        return $this->render(
+            'AhonymousBlogBundle:Article:show.html.twig',
+            array(
+                'article'      => $article,
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
 
     /**
@@ -143,23 +168,36 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem("Article", $this->get("router")->generate("article"));
-        $breadcrumbs->addItem("Edit article", $this->get("router")->generate("article_edit", array('slug' => $slug)));
+        $breadcrumbs->addItem(
+            "Article",
+            $this->get("router")->generate("article")
+        );
+        $breadcrumbs->addItem(
+            "Edit article",
+            $this->get("router")
+                ->generate("article_edit", array('slug' => $slug))
+        );
 
-        $article = $em->getRepository('AhonymousBlogBundle:Article')->findOneBy(array('slug' => $slug));
+        $article = $em->getRepository('AhonymousBlogBundle:Article')
+            ->findOneBy(array('slug' => $slug));
 
         if (!$article) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
+            throw $this->createNotFoundException(
+                'Unable to find Article entity.'
+            );
         }
 
         $editForm = $this->createEditForm($article);
         $deleteForm = $this->createDeleteForm($slug);
 
-        return $this->render('AhonymousBlogBundle:Article:edit.html.twig', array(
-            'article'      => $article,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render(
+            'AhonymousBlogBundle:Article:edit.html.twig',
+            array(
+                'article'      => $article,
+                'edit_form'   => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
 
     /**
@@ -172,7 +210,10 @@ class ArticleController extends Controller
     private function createEditForm(Article $article)
     {
         $form = $this->createForm(new ArticleType(), $article, array(
-            'action' => $this->generateUrl('article_update', array('slug' => $article->getSlug())),
+            'action' => $this->generateUrl(
+                    'article_update',
+                    array('slug' => $article->getSlug())
+                ),
             'method' => 'PUT',
         ));
 
@@ -188,11 +229,14 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $article = $em->getRepository('AhonymousBlogBundle:Article')->findOneBy(array('slug' => $slug));
+        $article = $em->getRepository('AhonymousBlogBundle:Article')
+            ->findOneBy(array('slug' => $slug));
         $id = $article->getId();
 
         if (!$article) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
+            throw $this->createNotFoundException(
+                'Unable to find Article entity.
+                ');
         }
 
         $deleteForm = $this->createDeleteForm($slug);
@@ -201,16 +245,23 @@ class ArticleController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
-            $updatedArticle = $em->getRepository('AhonymousBlogBundle:Article')->findOneBy(array('id' => $id));
+            $updatedArticle = $em->getRepository('AhonymousBlogBundle:Article')
+                ->findOneBy(array('id' => $id));
 
-            return $this->redirect($this->generateUrl('article_show', array('slug' => $updatedArticle->getSlug())));
+            return $this->redirect($this->generateUrl(
+                    'article_show',
+                    array('slug' => $updatedArticle->getSlug()))
+            );
         }
 
-        return $this->render('AhonymousBlogBundle:Article:edit.html.twig', array(
-            'article'      => $article,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render(
+            'AhonymousBlogBundle:Article:edit.html.twig',
+            array(
+                'article'      => $article,
+                'edit_form'   => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
     /**
      * Deletes a Article entity.
@@ -223,10 +274,13 @@ class ArticleController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $article = $em->getRepository('AhonymousBlogBundle:Article')->findOneBy(array('slug' => $slug));
+            $article = $em->getRepository('AhonymousBlogBundle:Article')
+                ->findOneBy(array('slug' => $slug));
 
             if (!$article) {
-                throw $this->createNotFoundException('Unable to find Article entity.');
+                throw $this->createNotFoundException(
+                    'Unable to find Article entity.'
+                );
             }
 
             $em->remove($article);
@@ -246,9 +300,15 @@ class ArticleController extends Controller
     private function createDeleteForm($slug)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('article_delete', array('slug' => $slug)))
+            ->setAction($this->generateUrl(
+                    'article_delete',
+                    array('slug' => $slug))
+            )
             ->setMethod('DELETE')
-            ->add('delete', 'submit', array('label' => 'Delete', 'attr' => array('class' => "btn btn-danger")))
+            ->add('delete', 'submit', array(
+                    'label' => 'Delete',
+                    'attr' => array('class' => "btn btn-danger"))
+            )
             ->getForm()
         ;
     }

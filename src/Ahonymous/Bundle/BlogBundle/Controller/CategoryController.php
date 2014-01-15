@@ -23,11 +23,15 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $categories = $em->getRepository('AhonymousBlogBundle:Category')->findAll();
+        $categories = $em->getRepository('AhonymousBlogBundle:Category')
+            ->findAll();
 
-        return $this->render('AhonymousBlogBundle:Category:index.html.twig', array(
-            'categories' => $categories,
-        ));
+        return $this->render(
+            'AhonymousBlogBundle:Category:index.html.twig',
+            array(
+             'categories' => $categories,
+            )
+        );
     }
     /**
      * Creates a new Category entity.
@@ -44,12 +48,18 @@ class CategoryController extends Controller
             $em->persist($category);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('category_show', array('slug' => $category->getSlug())));
+            return $this->redirect($this->generateUrl(
+                    'category_show',
+                    array('slug' => $category->getSlug()))
+            );
         }
 
-        return $this->render('AhonymousBlogBundle:Category:new.html.twig', array(
-            'form'   => $form->createView(),
-        ));
+        return $this->render(
+            'AhonymousBlogBundle:Category:new.html.twig',
+            array(
+                'form'   => $form->createView(),
+            )
+        );
     }
 
     /**
@@ -80,9 +90,12 @@ class CategoryController extends Controller
         $category = new Category();
         $form   = $this->createCreateForm($category);
 
-        return $this->render('AhonymousBlogBundle:Category:new.html.twig', array(
-            'form'   => $form->createView(),
-        ));
+        return $this->render(
+            'AhonymousBlogBundle:Category:new.html.twig',
+            array(
+                'form'   => $form->createView(),
+            )
+        );
     }
 
     /**
@@ -93,18 +106,24 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $category = $em->getRepository('AhonymousBlogBundle:Category')->findOneBy(array('slug' => $slug));
+        $category = $em->getRepository('AhonymousBlogBundle:Category')
+            ->findOneBy(array('slug' => $slug));
 
         if (!$category) {
-            throw $this->createNotFoundException('Unable to find Category entity.');
+            throw $this->createNotFoundException(
+                'Unable to find Category entity.'
+            );
         }
 
         $deleteForm = $this->createDeleteForm($slug);
 
-        return $this->render('AhonymousBlogBundle:Category:show.html.twig', array(
-            'category'      => $category,
-            'delete_form' => $deleteForm->createView()
-        ));
+        return $this->render(
+            'AhonymousBlogBundle:Category:show.html.twig',
+            array(
+                'category'      => $category,
+                'delete_form' => $deleteForm->createView()
+            )
+        );
     }
 
     /**
@@ -115,19 +134,25 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $category = $em->getRepository('AhonymousBlogBundle:Category')->findOneBy(array('slug' => $slug));
+        $category = $em->getRepository('AhonymousBlogBundle:Category')
+            ->findOneBy(array('slug' => $slug));
 
         if (!$category) {
-            throw $this->createNotFoundException('Unable to find Category entity.');
+            throw $this->createNotFoundException(
+                'Unable to find Category entity.'
+            );
         }
 
         $editForm = $this->createEditForm($category);
         $deleteForm = $this->createDeleteForm($slug);
 
-        return $this->render('AhonymousBlogBundle:Category:edit.html.twig', array(
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render(
+            'AhonymousBlogBundle:Category:edit.html.twig',
+            array(
+                'edit_form'   => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
 
     /**
@@ -140,7 +165,10 @@ class CategoryController extends Controller
     private function createEditForm(Category $category)
     {
         $form = $this->createForm(new CategoryType(), $category, array(
-            'action' => $this->generateUrl('category_update', array('slug' => $category->getSlug())),
+            'action' => $this->generateUrl(
+                'category_update',
+                array('slug' => $category->getSlug())
+            ),
             'method' => 'PUT',
         ));
 
@@ -156,10 +184,13 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $category = $em->getRepository('AhonymousBlogBundle:Category')->findOneBy(array('slug' => $slug));
+        $category = $em->getRepository('AhonymousBlogBundle:Category')
+            ->findOneBy(array('slug' => $slug));
 
         if (!$category) {
-            throw $this->createNotFoundException('Unable to find Category entity.');
+            throw $this->createNotFoundException(
+                'Unable to find Category entity.'
+            );
         }
 
         $deleteForm = $this->createDeleteForm($slug);
@@ -169,13 +200,19 @@ class CategoryController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('category_edit', array('slug' => $slug)));
+            return $this->redirect($this->generateUrl(
+                    'category_edit',
+                    array('slug' => $slug))
+            );
         }
 
-        return $this->render('AhonymousBlogBundle:Category:edit.html.twig', array(
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->render(
+            'AhonymousBlogBundle:Category:edit.html.twig',
+            array(
+                'edit_form'   => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            )
+        );
     }
     /**
      * Deletes a Category entity.
@@ -188,10 +225,13 @@ class CategoryController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $category = $em->getRepository('AhonymousBlogBundle:Category')->findOneBy(array('slug' => $slug));
+            $category = $em->getRepository('AhonymousBlogBundle:Category')
+                ->findOneBy(array('slug' => $slug));
 
             if (!$category) {
-                throw $this->createNotFoundException('Unable to find Category entity.');
+                throw $this->createNotFoundException(
+                    'Unable to find Category entity.'
+                );
             }
 
             $em->remove($category);
@@ -211,7 +251,10 @@ class CategoryController extends Controller
     private function createDeleteForm($slug)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('category_delete', array('slug' => $slug)))
+            ->setAction($this->generateUrl(
+                    'category_delete',
+                    array('slug' => $slug))
+            )
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
