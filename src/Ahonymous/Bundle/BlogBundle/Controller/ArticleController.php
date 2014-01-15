@@ -140,7 +140,7 @@ class ArticleController extends Controller
             );
         }
 
-        $article->setViewed($article->getViewed()+1);
+        $article->setViewed($article->getViewed() + 1);
         $em->flush();
         $breadcrumbs->addItem(
             $article->getName(),
