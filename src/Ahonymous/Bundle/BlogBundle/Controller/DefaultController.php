@@ -15,9 +15,9 @@ use Symfony\Component\Yaml\Yaml;
 class DefaultController extends Controller
 {
     /**
-     * @param int $page
-     * @return array
      * @Template()
+     * @param  int   $page
+     * @return array
      */
     public function indexAction($page = 1)
     {
@@ -104,7 +104,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param  Request                                            $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function searchAction(Request $request)
@@ -153,9 +153,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param DoctrineORMAdapter $adapter
-     * @param int $page
-     * @param int $maxPerPage
+     * @param  DoctrineORMAdapter                                            $adapter
+     * @param  int                                                           $page
+     * @param  int                                                           $maxPerPage
      * @return Pagerfanta
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */

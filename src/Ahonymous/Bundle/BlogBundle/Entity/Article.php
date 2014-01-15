@@ -100,7 +100,7 @@ class Article
     {
         return $this->id;
     }
-    
+
     /**
      * Constructor
      */
