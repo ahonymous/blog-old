@@ -12,13 +12,13 @@
             {{ form_widget(edit_form.name, { 'attr': {'class': 'form-control input-lg'}}) }}
         </div>
         </p>
-        <div class="input-group">
-            <label class="">{{ form_label(edit_form.body) }}</label></p>
-            {{ form_widget(edit_form.body, { 'attr': {'class': 'input-block-level'}}) }}
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ form_label(edit_form.body) }}</div>
+            <div class="panel-body">
+                {{ form_widget(edit_form.body, { 'attr': {'class': 'form-control input-block-level'}}) }}
+            </div>
         </div>
-        {#{{ form_label(edit_form.body) }}#}
-        {#{{ form_widget(edit_form.body) }}#}
-        </p>
+        {#</p>#}
         <div class="input-group">
             <span class="input-group-addon">{{ form_label(edit_form.author) }}</span>
             {{ form_widget(edit_form.author, { 'attr': {'class': 'form-control'}}) }}
@@ -35,9 +35,9 @@
         {{ form_end(edit_form) }}
 
         <div>
-                <a href="{{ path('home') }}">
-                    Back to the list
-                </a>
+            <a href="{{ path('home') }}">
+                Back to the list
+            </a>
 
             {{ form(delete_form) }}
         </div>
