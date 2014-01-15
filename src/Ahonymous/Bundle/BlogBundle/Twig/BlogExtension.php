@@ -8,8 +8,6 @@
 
 namespace Ahonymous\Bundle\BlogBundle\Twig;
 
-//use CG\Core\ClassUtils;
-
 class BlogExtension extends \Twig_Extension
 {
     public function getFilters()
@@ -43,6 +41,8 @@ class BlogExtension extends \Twig_Extension
             $close = explode(' ', $str);
             $come = '';
             $i = 0;
+            $comeTag = array();
+            $comeArray = array();
             while (strlen($come) < $length) {
                 $come .= ' ' . $close[$i];
                 if (preg_match("!<(.*?)>!si",$close[$i],$ok)) {
