@@ -4,7 +4,6 @@ namespace Ahonymous\Bundle\BlogBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Ahonymous\Bundle\BlogBundle\Entity\Category;
 use Ahonymous\Bundle\BlogBundle\Form\CategoryType;
 

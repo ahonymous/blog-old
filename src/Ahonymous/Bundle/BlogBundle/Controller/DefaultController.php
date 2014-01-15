@@ -15,6 +15,8 @@ use Symfony\Component\Yaml\Yaml;
 class DefaultController extends Controller
 {
     /**
+     * @param int $page
+     * @return array
      * @Template()
      */
     public function indexAction($page = 1)
@@ -101,6 +103,10 @@ class DefaultController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function searchAction(Request $request)
     {
         $mySearchRequest = $request->createFromGlobals();
@@ -117,6 +123,11 @@ class DefaultController extends Controller
         }
     }
 
+    /**
+     * @param $searched
+     * @param $page
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function findAction($searched, $page)
     {
         $em = $this->getDoctrine()->getManager();
@@ -141,6 +152,13 @@ class DefaultController extends Controller
         );
     }
 
+    /**
+     * @param $adapter
+     * @param int $page
+     * @param int $maxPerPage
+     * @return Pagerfanta
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
     protected function getPagerfanta($adapter, $page = 1, $maxPerPage = 2)
     {
         $pager = new Pagerfanta($adapter);
