@@ -185,6 +185,7 @@ class CategoryController extends Controller
 
         $category = $em->getRepository('AhonymousBlogBundle:Category')
             ->findOneBy(array('slug' => $slug));
+        $id = $category->getId();
 
         if (!$category) {
             throw $this->createNotFoundException(
@@ -198,10 +199,12 @@ class CategoryController extends Controller
 
         if ($editForm->isValid()) {
             $em->flush();
+            $updatedCategory = $em->getRepository('AhonymousBlogBundle:Category')
+                ->findOneBy(array('id' => $id));
 
             return $this->redirect($this->generateUrl(
-                    'category_edit',
-                    array('slug' => $slug))
+                    'category_show',
+                    array('slug' => $updatedCategory->getSlug()))
             );
         }
 
