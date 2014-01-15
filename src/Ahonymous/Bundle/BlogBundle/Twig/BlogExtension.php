@@ -48,9 +48,13 @@ class BlogExtension extends \Twig_Extension
                 }
             }
 
-            $tag = (isset($ok) and count($ok) != 0) ? array_pop($lastTag) : null;
+            if (!empty($lastTag)) {
+                $tag = (count($lastTag) != 0) ? array_pop($lastTag) : null;
+            }
             $come .= '...';
-            $come .= (!is_null($tag)) ? "</".$tag.">": null;
+            if (isset($tag)) {
+                $come .= (!is_null($tag)) ? "</".$tag.">": null;
+            }
         } else {
             $come = null;
         }
