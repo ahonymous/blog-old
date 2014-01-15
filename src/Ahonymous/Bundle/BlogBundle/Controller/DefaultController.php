@@ -153,7 +153,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param $adapter
+     * @param DoctrineORMAdapter $adapter
      * @param int $page
      * @param int $maxPerPage
      * @return Pagerfanta
