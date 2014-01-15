@@ -41,19 +41,16 @@ class BlogExtension extends \Twig_Extension
             $close = explode(' ', $str);
             $come = '';
             $i = 0;
-            $comeTag = array();
-            $comeArray = array();
             while (strlen($come) < $length) {
                 $come .= ' ' . $close[$i];
-                if (preg_match("!<(.*?)>!si",$close[$i],$ok)) {
-                    $comeTag[] = $ok;
+                if (preg_match("!<(.*?)>!si",$close[$i++],$ok)) {
+                    $lastTag = $ok;
                 }
-                $comeArray[] = $close[$i++];
             }
 
-            $tag = (isset($comeTag)) ? array_pop($comeTag) : null;
+            $tag = (isset($ok)) ? array_pop($lastTag) : null;
             $come .= '...';
-            $come .= (!is_null($tag)) ? "</".$tag[1].">": null;
+            $come .= (!is_null($tag)) ? "</".$tag.">": null;
         } else {
             $come = null;
         }
