@@ -44,12 +44,21 @@ class BlogExtension extends \Twig_Extension
             $come = '';
             $i = 0;
             while (strlen($come) < $length) {
-                $come .= ' ' . $close[$i++];
+                $come .= ' ' . $close[$i];
+                if (preg_match("!<(.*?)>!si",$close[$i],$ok)) {
+                    $comeTag[] = $ok;
+                }
+                $comeArray[] = $close[$i++];
             }
 
-            return $come . '...';
+            $tag = (isset($comeTag)) ? array_pop($comeTag) : null ;
+            $come .= '...';
+            $come .= (!is_null($tag)) ? "</".$tag[1].">": null;
+
+            return $come;
         }
     }
+
 
     public function getName()
     {

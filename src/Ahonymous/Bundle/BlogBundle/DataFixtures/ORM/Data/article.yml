@@ -16,63 +16,63 @@ articles:
             <pre><code>sudo apt-get install i8kutils</code></pre>
             Далее создадим конфигурационный файл /etc/i8kmon.conf и внесём в него следуюущий конфиг:
             <pre><code>
-             # Sample i8kmon configuration file (/etc/i8kmon, ~/.i8kmon).
+            </p> # Sample i8kmon configuration file (/etc/i8kmon, ~/.i8kmon).
 
-             # Kernel I8K status file
+            </p> # Kernel I8K status file
             set config(proc_i8k)    /proc/i8k
 
-             # Kernel APM status file
+            </p> # Kernel APM status file
             set config(proc_apm)    /proc/apm
 
-             # Kernel ACPI status file
+            </p> # Kernel ACPI status file
             set config(proc_acpi)    /proc/acpi/ac_adapter/0/status
 
-             # External program to control the fans
+            </p> # External program to control the fans
             set config(i8kfan)    /usr/bin/i8kfan
 
-            # Applet geometry, override with --geometry option
+            </p> # Applet geometry, override with --geometry option</p>
             set config(geometry)    {}
 
-            # Run as daemon, override with --daemon option
+            </p> # Run as daemon, override with --daemon option
             set config(daemon)    0
 
-            # Automatic fan control, override with --auto option
+            </p> # Automatic fan control, override with --auto option
             set config(auto)    1
 
-            # Report status on stdout, override with --verbose option
+            </p> # Report status on stdout, override with --verbose option
             set config(verbose)    1
 
-            # Status check timeout (seconds), override with --timeout option
+            </p> # Status check timeout (seconds), override with --timeout option
             set config(timeout)    5
 
-            # Temperature display unit (C/F), override with --unit option
+            </p> # Temperature display unit (C/F), override with --unit option
             set config(unit)    C
 
-            # Temperature threshold at which the temperature is displayed in red
+            </p> # Temperature threshold at which the temperature is displayed in red
             set config(t_high)    80
 
-            # Minimum expected fan speed
+            </p> # Minimum expected fan speed
             set config(min_speed)    1800
 
-            # Temperature thresholds: {fan_speeds low_ac high_ac low_batt high_batt}
-            # These were tested on the I8000. If you have a different Dell laptop model
-            # you should check the BIOS temperature monitoring and set the appropriate
-            # thresholds here. In doubt start with low values and gradually rise them
-            # until the fans are not always on when the cpu is idle.
-            #set config(0)    {{0 0}  -1  60  -1  65}
-            #set config(1)    {{1 0}  50  70  55  75}
-            #set config(2)    {{1 1}  60  80  65  85}
-            #set config(3)    {{2 2}  70 128  75 128}
+            </p> # Temperature thresholds: {fan_speeds low_ac high_ac low_batt high_batt}
+            </p> # These were tested on the I8000. If you have a different Dell laptop model
+            </p> # you should check the BIOS temperature monitoring and set the appropriate
+            </p> # thresholds here. In doubt start with low values and gradually rise them
+            </p> # until the fans are not always on when the cpu is idle.
+            </p> #set config(0)    {{0 0}  -1  60  -1  65}
+            </p> #set config(1)    {{1 0}  50  70  55  75}
+            </p> #set config(2)    {{1 1}  60  80  65  85}
+            </p> #set config(3)    {{2 2}  70 128  75 128}
 
-            # Switch to state(1) on 55 celsius
+            </p> # Switch to state(1) on 55 celsius
             set config(0) {{-1 0} -1 55 -1 55}
-            # Switch back to state(0) on 48 celsius
-            # Switch to state(2) on 75 celsius
+            </p> # Switch back to state(0) on 48 celsius
+            </p> # Switch to state(2) on 75 celsius
             set config(1) {{-1 1} 48 75 48 75}
-            # Switch back to state(1) on 60 celsius
+            </p> # Switch back to state(1) on 60 celsius
             set config(2) {{-1 2} 60 128 60 128}
 
-            # end of file
+            </p> # end of file
             </code></pre>
             После этого, утилиту надо ещё и включить)) К счастью это делается просто: В файлах
             <pre><code>vim /etc/default/i8kmon vim /etc/default/i8kbuttons</code></pre>
