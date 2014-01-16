@@ -23,7 +23,7 @@
                     {{ article.author }}
                 </p>
                 <p>
-                    {{ article.body|endsWord(700)|nl2p("blog-post-body")|raw }}
+                    {{ article.body|endsWord(500)|nl2p("blog-post-body")|raw }}
                 </p>
                 <div class="blog-post-meta">
                     {% for category in article.categories %}

@@ -16,7 +16,9 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('name', 'text')
-            ->add('body', 'textarea')
+            ->add('body', 'textarea', array(
+                'attr' => array('rows' => '14')
+            ))
             ->add('author', 'email')
             ->add('categories');
     }

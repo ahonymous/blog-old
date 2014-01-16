@@ -2,23 +2,41 @@
 
 {% block content -%}
     {{ parent() }}
-    <h1 class="blog-title">Article creation</h1>
-    {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.body) }}
-        {{ form_row(form.author) }}
-        <ul class="category">
-            {% for category in form.categories %}
-                <li>{{ form_row(category.name) }}</li>
-            {% endfor %}
-        </ul>
-    {{ form_end(form) }}
+    <div class="blog-post">
+        <h1 class="blog-title">Article creation</h1>
+        {{ form_start(form, { 'attr': { 'class': 'form-group'}}) }}
+            <div class="input-group">
+                <span class="input-group-addon">{{ form_label(form.name) }}</span>
+                {{ form_widget(form.name, { 'attr': {'class': 'form-control input-lg'}}) }}
+            </div>
+            </p>
+            <div class="panel panel-default">
+                <div class="panel-heading">{{ form_label(form.body) }}</div>
+                <div class="panel-body">
+                    {{ form_widget(form.body, { 'attr': {'class': 'form-control input-block-level'}}) }}
+                </div>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon">{{ form_label(form.author) }}</span>
+                {{ form_widget(form.author, { 'attr': {'class': 'form-control'}}) }}
+            </div>
+            </p>
+            <div class="input-group">
+                <span class="input-group-addon">{{ form_label(form.categories) }}</span>
+                {{ form_widget(form.categories, { 'attr': {'class': 'form-control'}}) }}
+            </div>
+            </p>
+
+            {{ form_widget(form.submit, { 'attr': { 'class': 'btn btn-info'}}) }}
+
+        {{ form_end(form) }}
 
         <ul class="record_actions">
-    <li>
-        <a href="{{ path('article') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+            <li>
+                <a href="{{ path('article') }}">
+                    Back to the list
+                </a>
+            </li>
+        </ul>
+    </div>
 {% endblock %}
