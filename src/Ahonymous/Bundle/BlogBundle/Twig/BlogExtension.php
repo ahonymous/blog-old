@@ -35,31 +35,37 @@ class BlogExtension extends \Twig_Extension
     {
         if (strlen($str) < $length) {
             return $str;
-        }
-
-        if (!is_null($str)) {
+        } else {
             $close = explode(' ', $str);
             $come = '';
             $i = 0;
             while (strlen($come) < $length) {
-                $come .= ' ' . $close[$i];
-                if (preg_match("!<(.*?)>!si",$close[$i++],$ok)) {
-                    $lastTag = $ok;
-                }
-            }
-
-            if (!empty($lastTag)) {
-                $tag = (count($lastTag) != 0) ? array_pop($lastTag) : null;
+                $come .= ' ' . $close[$i++];
             }
             $come .= '...';
-            if (isset($tag)) {
-                $come .= (!is_null($tag)) ? "</".$tag.">": null;
-            }
-        } else {
-            $come = null;
+
+            $tag = $this->closeHTML($come);
+            $come .= (!is_null($tag)) ? $tag : null;
+
+            return trim($come);
+        }
+    }
+
+    public function closeHTML($preView = null)
+    {
+        $lastTag = '';
+        preg_match_all('#<[a-zA-Z0-9="\' ]{1,}[^>]*>#Usi', $preView, $m);
+        preg_match_all('#</[a-zA-Z0-9="\' ]{1,}[^>]*>#Usi', $preView, $m2);
+        foreach ($m2[0] as $k => $v) {
+            $m2[0][$k] = str_replace('/', '', $v);
         }
 
-        return trim($come);
+        foreach (array_reverse(array_diff($m[0], $m2[0])) as $v) {
+            $v = preg_replace("#(</?\w+)(?:\s(?:[^<>/]|/[^<>])*)?(/?>)#ui", '$1$2', $v);
+            $lastTag .= str_replace('<', '</', $v);
+        }
+
+        return $lastTag;
     }
 
     public function getName()

@@ -23,6 +23,31 @@ class BlogExtensionsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($equality, $result);
     }
 
+    /**
+     * @dataProvider tagHTML
+     */
+    public function testCloseHTML($equality, $string)
+    {
+        $checker = new BlogExtension();
+        $result = $checker->closeHTML($string);
+
+        $this->assertEquals($equality, $result);
+    }
+
+    public function tagHTML()
+    {
+        return array(
+            array('</p>', '<p>'),
+            array('</br>', '<br>'),
+            array('</code>', '<code>'),
+            array('', '</code>'),
+            array('</code></pre>', '<pre><code>'),
+            array('</a></code></pre>', '<pre><code><a href="#">'),
+            array('</code></pre></div>', '<div id ="one"><pre><code>'),
+            array('', '</p>')
+        );
+    }
+
     public function provider()
     {
         return array(
