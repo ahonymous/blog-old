@@ -12,21 +12,27 @@
         {% endif %}
         {#{{ app.request.attributes.get('_route') == '_search' ? title|lower }}#}
         {% for article in articles %}
-            <div class="blog-post">
+            <div class="blog-post" media>
                 <h2 class="blog-title">
                     <a href="{{ path('article_show', { 'slug': article.slug }) }}">
                         {{ article.name }}
                     </a>
                 </h2>
+
                 <p class="blog-post-meta">
                     {{ article.updated|date('M d Y') }},
                     {{ article.author }}
                 </p>
+                <img class="img-thumbnail" src="{{ article.image | default("/defaultArticleImage.png")}}" alt="...">
+                <div class="media-body">
                 <p>
                     {{ article.body|endsWord(500)|nl2p("blog-post-body")|raw }}
                 </p>
+                </div>
+
                 <div class="blog-post-meta">
                     {% for category in article.categories %}
+
                         {{ category }}&nbsp;
                     {% endfor %}</div>
                 <hr>

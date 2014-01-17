@@ -92,6 +92,19 @@ class Article
     protected $viewed;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $image;
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
      * Get id
      *
      * @return integer

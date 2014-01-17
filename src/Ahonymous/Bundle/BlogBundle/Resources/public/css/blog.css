@@ -246,3 +246,9 @@ textarea > .form-control {
     max-width: 100%;
     min-height: 250px;
 }
+
+.img-thumbnail {
+    clear: both;
+    float: left;
+    margin-right: 10px;
+}

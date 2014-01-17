@@ -15,7 +15,7 @@
             <!--<argument>%parameter_name%</argument>-->
         <!--</service>-->
 
-        <service id="twig.extension.pays_extension" class="%ahonymous_blog.twig_extension%">
+        <service id="twig.extension.blog_extension" class="%ahonymous_blog.twig_extension%">
             <tag name="twig.extension" alias="myTwigSet" />
         </service>
     </services>
