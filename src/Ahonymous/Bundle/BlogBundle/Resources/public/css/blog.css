@@ -252,3 +252,6 @@ textarea > .form-control {
     float: left;
     margin-right: 10px;
 }
+.media-body {
+    min-height: 140px;
+}
