@@ -192,6 +192,10 @@ h6, .h6 {
     text-align: justify;
 }
 
+ul, blockquote, pre, code {
+    display: table;
+}
+
 /*
  * Footer
  */
@@ -248,10 +252,10 @@ textarea > .form-control {
 }
 
 .img-thumbnail {
-    clear: both;
-    float: left;
-    margin-right: 10px;
+    float:left; /* Выравнивание по левому краю */
+    margin: 20px 10px 10px 0; /* Отступы вокруг картинки */
 }
+
 .media-body {
     min-height: 140px;
 }

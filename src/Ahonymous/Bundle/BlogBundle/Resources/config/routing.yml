@@ -13,14 +13,9 @@ _find:
     requirements:
         page:  \d+
 
-
 about:
     pattern:  /about
     defaults: { _controller: "AhonymousBlogBundle:Default:about" }
-
-#guest:
-#    pattern:  /guest
-#    defaults: { _controller: "AhonymousBlogBundle:Default:guest" }
 
 _article:
     resource: "@AhonymousBlogBundle/Resources/config/routing/article.yml"
@@ -39,3 +34,8 @@ home:
     defaults: { _controller: "AhonymousBlogBundle:Default:index", page: 1 }
     requirements:
         page:  \d+
+
+login:
+    pattern: /login
+    defaults: { _controller: "AhonymousBlogBundle:Default:login" }
+#    methods:  [POST]

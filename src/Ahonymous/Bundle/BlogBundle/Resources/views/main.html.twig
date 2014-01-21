@@ -25,7 +25,7 @@
                 <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
             </div>
 
-            <div class="navbar-inner navbar-inverse" data-spy="affix" data-offset-top="110">
+            <div class="navbar-inner navbar-inverse" data-spy="affix" data-offset-top="160">
                 <div class="blog-nav">
                     <a class="blog-nav-item {{
                     app.request.attributes.get('_route') == 'home' ? 'active'
@@ -54,6 +54,11 @@
                             </button>
                         </div>
                     </form>
+                    <a href={{ path('login') }} class="blog-nav-item navbar-right {{
+                     app.request.attributes.get('_route') == 'login' ? 'active'
+                    }}">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </a>
                 </div>
             </div>
         </div>

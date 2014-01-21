@@ -172,4 +172,18 @@ class DefaultController extends Controller
 
         return $pager;
     }
+
+    /**
+     *  @Template()
+     */
+    public function loginAction()
+    {
+        $form = $this->createFormBuilder()
+            ->add('login', 'text')
+            ->add('password', 'password')
+            ->add('save', 'submit')
+            ->getForm();
+
+        return array('login_form' => $form);
+    }
 }
