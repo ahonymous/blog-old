@@ -1,0 +1,53 @@
+{% extends 'AhonymousBlogBundle::main.html.twig' %}
+
+{% block title %}{{ title|default('TITLE') }}{% endblock title %}
+
+{% block content %}
+    {{ parent() }}
+    <div>
+        {% if (app.request.attributes.get('_route') == '_find') %}
+            <div class="blog-post alert alert-info">
+                <h4 class="blog-title">You need searched "{{ searcher }}".</h4>
+            </div>
+        {% endif %}
+        {#{{ app.request.attributes.get('_route') == '_search' ? title|lower }}#}
+        {% for article in articles %}
+            <div class="blog-post" media>
+                <h2 class="blog-title">
+                    <a href="{{ path('article_show', { 'slug': article.slug }) }}">
+                        {{ article.name }}
+                    </a>
+                </h2>
+
+                <p class="blog-post-meta">
+                    {{ article.updated|date('M d Y') }},
+                    {{ article.author }}
+                </p>
+                <img class="img-thumbnail" src="{{ article.image | default("/defaultArticleImage.png")}}" alt="...">
+                <div class="media-body">
+                <p>
+                    {{ article.body|endsWord(500)|nl2p("blog-post-body")|raw }}
+                </p>
+                </div>
+
+                <div class="blog-post-meta">
+                    {% for category in article.categories %}
+
+                        {{ category }}&nbsp;
+                    {% endfor %}</div>
+                <hr>
+                <a href="{{ path('article_show', { 'slug': article.slug }) }}">
+                    Read more
+                </a>
+            </div>
+
+        {% endfor %}
+    </div>
+
+    <div class="navbar-inner">
+        <div class="pagination pagination-centered">
+            {{ pagerfanta(articles, 'twitter_bootstrap3') }}
+        </div>
+        {#<p>{{ articles|length }}</p>#}
+    </div>
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends 'AhonymousBlogBundle::main.html.twig' %}
+
+{% block content -%}
+    <div class="blog-post">
+        <h1 class="blog-title">Category</h1>
+
+        <table class="record_properties">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ category.id }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ category.name }}</td>
+                </tr>
+                <tr>
+                    <th>Created</th>
+                    <td>{{ category.created|date('Y-m-d H:i:s') }}</td>
+                </tr>
+                <tr>
+                    <th>Deleted</th>
+                    <td>{{ category.deleted|date('Y-m-d H:i:s') }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <ul class="record_actions">
+            <li>
+                <a href="{{ path('category') }}">
+                    Back to the list
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('category_edit', { 'slug': category.slug }) }}">
+                    Edit
+                </a>
+            </li>
+            <li>{{ form(delete_form) }}</li>
+        </ul>
+    </div>
+{% endblock %}

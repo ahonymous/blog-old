@@ -1,0 +1,50 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Hello{% endblock title %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src={{ asset('js/ie8.js') }}></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src={{ asset('js/html5shiv.js') }}></script>
+    <script src={{ asset('js/respond.min.js') }}></script>
+    <![endif]-->
+{% endblock stylesheets %}
+
+{% block body %}
+
+    <div id="wrap">
+
+        <!-- Fixed navbar -->
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation" id="header">
+
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ path('home') }}">Home</a>
+                </div>
+                {% block header %}{% endblock header %}
+        </div>
+
+
+        <!-- Begin page content -->
+        <div class="container">
+            <div>
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="container">
+            {% block footer %}{% endblock %}
+        </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+{% endblock body %}

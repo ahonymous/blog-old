@@ -1,0 +1,47 @@
+{% extends 'AhonymousBlogBundle::main.html.twig' %}
+
+{% block content -%}
+    <div class="blog-post">
+        <h1 class="blog-title">Category list</h1>
+
+        <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Created</th>
+                <th>Deleted</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td><a href="{{ path('category_show', { 'slug': category.slug }) }}">{{ category.id }}</a></td>
+                <td>{{ category.name }}</td>
+                <td>{% if category.created %}{{ category.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if category.deleted %}{{ category.deleted|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('category_show', { 'slug': category.slug }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('category_edit', { 'slug': category.slug }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+            <li>
+                <a href="{{ path('category_new') }}">
+                    Create a new entry
+                </a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

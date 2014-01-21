@@ -1,0 +1,41 @@
+_hello:
+    resource: "@AhonymousBlogBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+_search:
+    pattern:  /search
+    defaults: { _controller: "AhonymousBlogBundle:Default:search" }
+
+_find:
+    pattern:  /find/{searched}/{page}
+    defaults: { _controller: "AhonymousBlogBundle:Default:find", searched: '', page: 1 }
+    requirements:
+        page:  \d+
+
+about:
+    pattern:  /about
+    defaults: { _controller: "AhonymousBlogBundle:Default:about" }
+
+_article:
+    resource: "@AhonymousBlogBundle/Resources/config/routing/article.yml"
+    prefix:   /admin/article
+
+_category:
+    resource: "@AhonymousBlogBundle/Resources/config/routing/category.yml"
+    prefix:   /admin/category
+
+article_show:
+    pattern:  /article/{slug}
+    defaults: { _controller: "AhonymousBlogBundle:Article:show" }
+
+home:
+    pattern:  /{page}
+    defaults: { _controller: "AhonymousBlogBundle:Default:index", page: 1 }
+    requirements:
+        page:  \d+
+
+login:
+    pattern: /login
+    defaults: { _controller: "AhonymousBlogBundle:Default:login" }
+#    methods:  [POST]

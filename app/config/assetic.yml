@@ -1,0 +1,61 @@
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    bundles:        [ ]
+    #java: /usr/bin/java
+    filters:
+        cssrewrite: ~
+        yui_css:
+            jar: %kernel.root_dir%/../vendor/nervo/yuicompressor/yuicompressor.jar
+    assets:
+        assets_css:
+           inputs:
+               - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css
+           filters:
+               - cssrewrite
+#               - yui_css
+           output: css/bootstrap.min.css
+        jquery:
+           inputs:
+               - %kernel.root_dir%/../components/jquery/jquery.min.js
+           output: js/jquery.min.js
+        jquery_map:
+           inputs:
+               - %kernel.root_dir%/../components/jquery/jquery.min.map
+           output: js/jquery.min.map
+        javaScript-bootstrap:
+           inputs:
+               - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js
+           output: js/bootstrap.min.js
+        blog:
+           inputs:
+               - %kernel.root_dir%/../src/Ahonymous/Bundle/BlogBundle/Resources/public/css/blog.css
+           filters:
+               - yui_css
+           output: css/blog.css
+        footer_css:
+           inputs:
+               - %kernel.root_dir%/../src/Ahonymous/Bundle/GuestBundle/Resources/public/css/footer.css
+           filters:
+               - cssrewrite
+               - yui_css
+           output: css/footer.css
+        ie8:
+           inputs:
+               - %kernel.root_dir%/../vendor/twbs/bootstrap/docs/assets/js/ie8-responsive-file-warning.js
+           output: js/ie8.js
+        html5:
+           inputs:
+               - %kernel.root_dir%/Resources/public/js/html5shiv.js
+           output: js/html5shiv.js
+        respond:
+           inputs:
+               - %kernel.root_dir%/Resources/public/js/respond.min.js
+           output: js/respond.min.js
+        holder:
+           inputs:
+               - %kernel.root_dir%/../vendor/twbs/bootstrap/docs/assets/js/holder.js
+#           filters:
+#               - yui_css
+           output: js/holder.js

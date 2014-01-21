@@ -1,0 +1,44 @@
+{% extends 'AhonymousBlogBundle::main.html.twig' %}
+
+{% block content -%}
+    {{ parent() }}
+    <div class="blog-post">
+        <h1 class="blog-title">Article edit</h1>
+
+        {{ form_start(edit_form, { 'attr': { 'class': 'form-group'}}) }}
+        <div class="input-group">
+            <span class="input-group-addon">{{ form_label(edit_form.name) }}</span>
+            {{ form_widget(edit_form.name, { 'attr': {'class': 'form-control input-lg'}}) }}
+        </div>
+        </p>
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ form_label(edit_form.body) }}</div>
+            <div class="panel-body">
+                {{ form_widget(edit_form.body, { 'attr': {'class': 'form-control input-block-level'}}) }}
+            </div>
+        </div>
+        {#</p>#}
+        <div class="input-group">
+            <span class="input-group-addon">{{ form_label(edit_form.author) }}</span>
+            {{ form_widget(edit_form.author, { 'attr': {'class': 'form-control'}}) }}
+        </div>
+        </p>
+        <div class="input-group">
+            <span class="input-group-addon">{{ form_label(edit_form.categories) }}</span>
+            {{ form_widget(edit_form.categories, { 'attr': {'class': 'form-control'}}) }}
+        </div>
+        </p>
+
+        {{ form_widget(edit_form.submit, { 'attr': { 'class': 'btn btn-info'}}) }}
+
+        {{ form_end(edit_form) }}
+
+        <div>
+            <a href="{{ path('home') }}">
+                Back to the list
+            </a>
+
+            {{ form(delete_form) }}
+        </div>
+    </div>
+{% endblock %}

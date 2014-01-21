@@ -1,0 +1,25 @@
+{% extends "AhonymousGuestBundle::main.html.twig" %}
+
+{% block title %}Single #{{ guest.id }}{% endblock %}
+
+{% block header %}
+
+{% endblock header %}
+
+{% block content %}
+    <h1>Message #{{ guest.id }}</h1>
+    <hr>
+    <p class="lead">Name: {{ guest.name }}</p>
+    <p class="lead">From e-mail: {{ guest.email }}</p>
+    <p class="lead">Message:<br/> {{ guest.message }}</p>
+    <hr>
+
+    <a class="btn btn-success" href="{{ path('guest') }}"><-Back to list</a>
+    <a class="btn btn-danger" href="{{ path('_delete', {'slug': guest.slug}) }}">Delete</a>
+
+
+{% endblock content %}
+
+{% block footer %}
+
+{% endblock footer %}
