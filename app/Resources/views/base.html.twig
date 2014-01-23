@@ -5,9 +5,135 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/blog.css') }}" rel="stylesheet">
+
+        <!-- Just for debugging purposes. Don't actually copy this line! -->
+        <!--[if lt IE 9]><script src={{ asset('js/ie8.js') }}></script><![endif]-->
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src={{ asset('js/html5shiv.js') }}></script>
+        <script src={{ asset('js/respond.min.js') }}></script>
+        <![endif]-->
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <div id="wrap">
+            <a
+                href="http://stfalcon.github.io/euromaidan/"
+                class="em-ribbon" style="
+                    position: absolute;
+                    left:0;
+                    top:0;
+                    width: 90px;
+                    height: 90px;
+                    background: url('http://stfalcon.github.io/euromaidan/img/em-ribbon.png');
+                    z-index: 2013;
+                    border: 0;
+                "
+                title="Розмісти стрічку з символікою України і ЄС на своєму сайті!"
+                target="_blank"
+            ></a>
+
+            <div class="blog-masthead">
+                <div class="container">
+                    <div class="blog-header">
+                        <h1 class="blog-title"><a href={{ path('home') }}>MYBlog</a></h1>
+                        <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+                    </div>
+
+                    <div class="navbar-inner navbar-inverse" data-spy="affix" data-offset-top="90">
+                        <div class="blog-nav">
+                            <a class="blog-nav-item {{
+                            app.request.attributes.get('_route') == 'home' ? 'active'
+                            }}"
+                               href={{ path('home') }}>
+                                <span class="glyphicon glyphicon-home"></span> Home
+                            </a>
+                            <a class="blog-nav-item {{
+                            app.request.attributes.get('_route') == 'about' ? 'active'
+                            }}"
+                               href={{ path('about') }}>
+                                <span class="glyphicon glyphicon-star"></span> About me
+                            </a>
+                            <a class="blog-nav-item {{
+                            app.request.attributes.get('_route') == 'guest' ? 'active'
+                            }}"
+                               href="{{ path('guest') }}">
+                                <span class="glyphicon glyphicon-book"></span> GuestBook
+                            </a>
+
+                            <form class="navbar-form navbar-right" role="search" action="{{ path('_search') }}" method="POST">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Search" name="search">
+                                    <button class="btn btn-default" type="submit">
+                                        <span class="glyphicon glyphicon-search"> </span>
+                                    </button>
+                                </div>
+                            </form>
+
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <a href="{{ path('fos_user_security_logout') }}" class="blog-nav-item navbar-right">
+                                    <span class="glyphicon glyphicon-log-out"></span>
+                                    {#{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}#}
+                                </a>
+                                <a
+                                        href="{{ path('fos_user_profile_show') }}"
+                                        class="blog-nav-item navbar-right {{
+                                        app.request.attributes.get('_route') == 'fos_user_profile_show' ? 'active'
+                                        }}"
+                                        >
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    {{ app.user.username }}
+                                </a>
+                            {% else %}
+                                <a
+                                    href="{{ path('fos_user_registration_register') }}"
+                                    class="blog-nav-item navbar-right {{
+                                        app.request.attributes.get('_route') == 'fos_user_registration_register' ? 'active'
+                                    }}"
+                                    title="{{ 'layout.register'|trans({}, 'FOSUserBundle') }}"
+                                >
+                                    <span class="glyphicon glyphicon-registration-mark" ></span>
+                                </a>
+                                <a
+                                    href="{{ path('fos_user_security_login') }}"
+                                    class="blog-nav-item navbar-right {{
+                                        app.request.attributes.get('_route') == 'fos_user_security_login' ? 'active'
+                                    }}" title="{{ 'layout.login'|trans({}, 'FOSUserBundle') }}">
+                                    <span class="glyphicon glyphicon-log-in" ></span>
+                                </a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container">
+
+                <div class="row">
+                    {% block body %}{% endblock %}
+
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-footer navbar-inverse">
+            <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>. Created by <a href="https://github.com/ahonymous">Oleksandr Moshta</a>. &copy 2014</p>
+            <p>
+                <a href="#">Back to top</a>
+            </p>
+
+        </div>
+
+        {% block javascripts %}
+            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+            <script src={{ asset('js/jquery.min.js') }}></script>
+            <!-- Include all compiled plugins (below), or include individual files as needed -->
+            <script src={{ asset('js/bootstrap.min.js') }}></script>
+            <script src={{ asset('js/holder.js') }}></script>
+        {% endblock %}
     </body>
 </html>

@@ -31,16 +31,10 @@ assetic:
         blog:
            inputs:
                - %kernel.root_dir%/../src/Ahonymous/Bundle/BlogBundle/Resources/public/css/blog.css
+               - %kernel.root_dir%/../src/Ahonymous/Bundle/GuestBundle/Resources/public/css/footer.css
            filters:
                - yui_css
            output: css/blog.css
-        footer_css:
-           inputs:
-               - %kernel.root_dir%/../src/Ahonymous/Bundle/GuestBundle/Resources/public/css/footer.css
-           filters:
-               - cssrewrite
-               - yui_css
-           output: css/footer.css
         ie8:
            inputs:
                - %kernel.root_dir%/../vendor/twbs/bootstrap/docs/assets/js/ie8-responsive-file-warning.js
@@ -55,7 +49,7 @@ assetic:
            output: js/respond.min.js
         holder:
            inputs:
-               - %kernel.root_dir%/../vendor/twbs/bootstrap/docs/assets/js/holder.js
+               - %kernel.root_dir%/../vendor/twbs/bootstrap/docs/assets/js/vendor/holder.js
 #           filters:
 #               - yui_css
            output: js/holder.js

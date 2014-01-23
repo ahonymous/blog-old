@@ -35,7 +35,7 @@ home:
     requirements:
         page:  \d+
 
-login:
-    pattern: /login
-    defaults: { _controller: "AhonymousBlogBundle:Default:login" }
+#login:
+#    pattern: /login
+#    defaults: { _controller: "AhonymousBlogBundle:Default:login" }
 #    methods:  [POST]

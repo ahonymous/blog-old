@@ -44,10 +44,7 @@
         {% endfor %}
     </div>
 
-    <div class="navbar-inner">
-        <div class="pagination pagination-centered">
+        <div class="pagination">
             {{ pagerfanta(articles, 'twitter_bootstrap3') }}
         </div>
-        {#<p>{{ articles|length }}</p>#}
-    </div>
 {% endblock content %}

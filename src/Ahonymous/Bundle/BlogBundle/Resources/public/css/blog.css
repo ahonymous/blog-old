@@ -53,6 +53,10 @@ h6, .h6 {
   font-weight: 500;
   color: #cdddeb;
 }
+.blog-nav-item > a {
+    color: inherit;
+}
+
 .blog-nav-item:hover,
 .blog-nav-item:focus {
   color: #fff;
@@ -153,7 +157,9 @@ h6, .h6 {
 
 /* Pagination */
 .pagination {
-  text-align: center;
+    display: table;
+    margin: 0 auto 10px;
+    text-align: center;
 }
 
 .pagination > li > a {
@@ -196,16 +202,22 @@ ul, blockquote, pre, code {
     display: table;
 }
 
+#wrap {
+    min-height: 100%;
+    /*margin-bottom: -100px;*/
+}
+
 /*
  * Footer
  */
 
 .blog-footer {
-  padding: 20px 0;
-  color: #000000;
-  text-align: center;
-  background-color: #aacd4e;
-  border-top: 1px solid #e5e5e5;
+    height: 100px;
+    padding: 20px 0;
+    color: #000000;
+    text-align: center;
+    background-color: #aacd4e;
+    border-top: 1px solid #e5e5e5;
 }
 
 .blog-footer a {

@@ -1,6 +1,9 @@
 ahonymous_blog:
     resource: "@AhonymousBlogBundle/Resources/config/routing.yml"
 
+ahonymous_fos_user:
+    resource: "@AhonymousUserBundle/Resources/config/routing.yml"
+
 ahonymous_guest:
     resource: "@AhonymousGuestBundle/Resources/config/routing.yml"
     prefix: /guest

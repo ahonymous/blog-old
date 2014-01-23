@@ -26,7 +26,8 @@
         "stof/doctrine-extensions-bundle": "~1.1@dev",
         "white-october/pagerfanta-bundle": "dev-master",
         "whiteoctober/breadcrumbs-bundle": "dev-master",
-        "phpunit/phpunit": "3.7.*@dev"
+        "phpunit/phpunit": "3.7.*@dev",
+        "friendsofsymfony/user-bundle": "~2.0@dev"
     },
     "scripts": {
         "post-install-cmd": [
