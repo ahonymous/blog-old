@@ -18,105 +18,110 @@
         <![endif]-->
     </head>
     <body>
-        <div id="wrap">
-            <a
-                href="http://stfalcon.github.io/euromaidan/"
-                class="em-ribbon" style="
-                    position: absolute;
-                    left:0;
-                    top:0;
-                    width: 90px;
-                    height: 90px;
-                    background: url('http://stfalcon.github.io/euromaidan/img/em-ribbon.png');
-                    z-index: 2013;
-                    border: 0;
-                "
-                title="Розмісти стрічку з символікою України і ЄС на своєму сайті!"
-                target="_blank"
-            ></a>
+        <a
+            href="http://stfalcon.github.io/euromaidan/"
+            class="em-ribbon" style="
+                position: absolute;
+                left:0;
+                top:0;
+                width: 90px;
+                height: 90px;
+                background: url('http://stfalcon.github.io/euromaidan/img/em-ribbon.png');
+                z-index: 2013;
+                border: 0;
+            "
+            title="Розмісти стрічку з символікою України і ЄС на своєму сайті!"
+            target="_blank"
+        ></a>
 
-            <div class="blog-masthead">
-                <div class="container">
-                    <div class="blog-header">
-                        <h1 class="blog-title"><a href={{ path('home') }}>MYBlog</a></h1>
-                        <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
-                    </div>
+        <div class="blog-masthead">
+            <div class="container">
+                <div class="blog-header">
+                    <h1 class="blog-title"><a href={{ path('home') }}>MYBlog</a></h1>
+                    <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+                </div>
 
-                    <div class="navbar-inner navbar-inverse" data-spy="affix" data-offset-top="90">
-                        <div class="blog-nav">
-                            <a class="blog-nav-item {{
-                            app.request.attributes.get('_route') == 'home' ? 'active'
-                            }}"
-                               href={{ path('home') }}>
-                                <span class="glyphicon glyphicon-home"></span> Home
-                            </a>
-                            <a class="blog-nav-item {{
-                            app.request.attributes.get('_route') == 'about' ? 'active'
-                            }}"
-                               href={{ path('about') }}>
-                                <span class="glyphicon glyphicon-star"></span> About me
-                            </a>
-                            <a class="blog-nav-item {{
-                            app.request.attributes.get('_route') == 'guest' ? 'active'
-                            }}"
-                               href="{{ path('guest') }}">
-                                <span class="glyphicon glyphicon-book"></span> GuestBook
-                            </a>
+                <div class="navbar-inner navbar-inverse blog-nav" data-spy="affix" data-offset-top="90">
+                    <a class="blog-nav-item {{
+                    app.request.attributes.get('_route') == 'home' ? 'active'
+                    }}"
+                       href={{ path('home') }}>
+                        <span class="glyphicon glyphicon-home"></span> Home
+                    </a>
+                    <a class="blog-nav-item {{
+                    app.request.attributes.get('_route') == 'about' ? 'active'
+                    }}"
+                       href={{ path('about') }}>
+                        <span class="glyphicon glyphicon-star"></span> About me
+                    </a>
+                    <a class="blog-nav-item {{
+                    app.request.attributes.get('_route') == 'guest' ? 'active'
+                    }}"
+                       href="{{ path('guest') }}">
+                        <span class="glyphicon glyphicon-book"></span> GuestBook
+                    </a>
 
-                            <form class="navbar-form navbar-right" role="search" action="{{ path('_search') }}" method="POST">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search" name="search">
-                                    <button class="btn btn-default" type="submit">
-                                        <span class="glyphicon glyphicon-search"> </span>
-                                    </button>
-                                </div>
-                            </form>
-
-                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <a href="{{ path('fos_user_security_logout') }}" class="blog-nav-item navbar-right">
-                                    <span class="glyphicon glyphicon-log-out"></span>
-                                    {#{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}#}
-                                </a>
-                                <a
-                                        href="{{ path('fos_user_profile_show') }}"
-                                        class="blog-nav-item navbar-right {{
-                                        app.request.attributes.get('_route') == 'fos_user_profile_show' ? 'active'
-                                        }}"
-                                        >
-                                    <span class="glyphicon glyphicon-user"></span>
-                                    {{ app.user.username }}
-                                </a>
-                            {% else %}
-                                <a
-                                    href="{{ path('fos_user_registration_register') }}"
-                                    class="blog-nav-item navbar-right {{
-                                        app.request.attributes.get('_route') == 'fos_user_registration_register' ? 'active'
-                                    }}"
-                                    title="{{ 'layout.register'|trans({}, 'FOSUserBundle') }}"
-                                >
-                                    <span class="glyphicon glyphicon-registration-mark" ></span>
-                                </a>
-                                <a
-                                    href="{{ path('fos_user_security_login') }}"
-                                    class="blog-nav-item navbar-right {{
-                                        app.request.attributes.get('_route') == 'fos_user_security_login' ? 'active'
-                                    }}" title="{{ 'layout.login'|trans({}, 'FOSUserBundle') }}">
-                                    <span class="glyphicon glyphicon-log-in" ></span>
-                                </a>
-                            {% endif %}
-
+                    <form class="navbar-form navbar-right" role="search" action="{{ path('_search') }}" method="POST">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search" name="search">
+                            <button class="btn btn-default" type="submit">
+                                <span class="glyphicon glyphicon-search"> </span>
+                            </button>
                         </div>
-                    </div>
+                    </form>
+
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <a href="{{ path('fos_user_security_logout') }}" class="blog-nav-item navbar-right">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                            {#{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}#}
+                        </a>
+                        <a
+                                href="{{ path('fos_user_profile_show') }}"
+                                class="blog-nav-item navbar-right {{
+                                app.request.attributes.get('_route') == 'fos_user_profile_show' ? 'active'
+                                }}"
+                                >
+                            <span class="glyphicon glyphicon-user"></span>
+                            {{ app.user.username }}
+                        </a>
+                    {% else %}
+                        <a
+                            href="{{ path('fos_user_registration_register') }}"
+                            class="blog-nav-item navbar-right {{
+                                app.request.attributes.get('_route') == 'fos_user_registration_register' ? 'active'
+                            }}"
+                            title="{{ 'layout.register'|trans({}, 'FOSUserBundle') }}"
+                        >
+                            <span class="glyphicon glyphicon-registration-mark" ></span>
+                        </a>
+                        <a
+                            href="{{ path('fos_user_security_login') }}"
+                            class="blog-nav-item navbar-right {{
+                                app.request.attributes.get('_route') == 'fos_user_security_login' ? 'active'
+                            }}" title="{{ 'layout.login'|trans({}, 'FOSUserBundle') }}">
+                            <span class="glyphicon glyphicon-log-in" ></span>
+                        </a>
+                    {% endif %}
+
                 </div>
             </div>
+        </div>
 
 
-            <div class="container">
+        <div class="container">
 
-                <div class="row">
-                    {% block body %}{% endblock %}
+            <div class="row">
+                {% for type, messages in app.session.flashbag.all() %}
 
-                </div>
+                    {% for key, message in messages %}
+                        <div class="flash-{{ type }}">
+                            {{ message|trans({}, 'FOSUserBundle') }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                {% block body %}{% endblock %}
+
             </div>
         </div>
 

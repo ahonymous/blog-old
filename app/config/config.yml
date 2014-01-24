@@ -54,3 +54,6 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Ahonymous\Bundle\UserBundle\Entity\User
+    registration:
+        form:
+            validation_groups: [Registration]
