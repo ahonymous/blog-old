@@ -27,7 +27,7 @@ class DefaultController extends Controller
             $this->get('translator')->trans('menu.home'),
             $this->get("router")->generate("home")
         );
-//        var_dump($this->get('session'), $this->get('request'));
+//        var_dump($this->get('data_collector.router')->getTargetUrl());
 
         $query = $em->getRepository('AhonymousBlogBundle:Article')
             ->findAllArticles();

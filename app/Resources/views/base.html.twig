@@ -38,7 +38,7 @@
             <div class="container">
                 <div class="blog-header">
                     <h1 class="blog-title"><a href={{ path('home') }}>Ahonymous BLOG</a></h1>
-                    {#<p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>#}
+                    <p class="lead blog-description">Leaning Symfony2.</p>
                 </div>
 
                 <div class="navbar-inner navbar-inverse blog-nav" data-spy="affix" data-offset-top="90">
@@ -69,8 +69,33 @@
                         </div>
                     </form>
 
-                    <span class="dropdown blog-nav-item">
-                        {{ app.request.locale }}
+                    <span class="dropdown blog-nav-item navbar-right">
+                        <span class="dropdown-toggle" data-toggle="dropdown">{{ app.request.locale }} <b class="caret"></b></span>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{
+                                path(
+                                    app.request.attributes.get('_route'),
+                                    app.request.attributes.get('_route_params') |
+                                    merge({'_locale': 'en'})
+                                )
+                            }}">EN</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{
+                                path(
+                                app.request.attributes.get('_route'),
+                                app.request.attributes.get('_route_params') |
+                                merge({'_locale': 'ru'})
+                                )
+                            }}">RU</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{
+                                path(
+                                app.request.attributes.get('_route'),
+                                app.request.attributes.get('_route_params') |
+                                merge({'_locale': 'uk'})
+                                )
+                            }}">UA</a></li>
+                        </ul>
                     </span>
 
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -108,7 +133,12 @@
                 </div>
             </div>
         </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
 
+
+            </ul>
+            </div>
 
         <div class="container">
 

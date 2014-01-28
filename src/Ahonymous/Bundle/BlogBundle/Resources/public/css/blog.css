@@ -224,7 +224,7 @@ ul, blockquote, pre, code {
     border-top: 1px solid #e5e5e5;
 }
 
-.blog-footer a {
+.blog-footer a, .dropdown-toggle {
     color: white;
 }
 
