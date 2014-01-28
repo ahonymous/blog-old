@@ -3,7 +3,12 @@ ahonymous_blog:
 
 ahonymous_fos_user:
     resource: "@AhonymousUserBundle/Resources/config/routing.yml"
+    prefix: /{_locale}
+    requirements:
+        _locale: en|ru|uk
 
 ahonymous_guest:
     resource: "@AhonymousGuestBundle/Resources/config/routing.yml"
-    prefix: /guest
+    prefix: /{_locale}/guest
+    requirements:
+        _locale: en|ru|uk

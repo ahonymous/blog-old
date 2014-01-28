@@ -37,8 +37,8 @@
         <div class="blog-masthead">
             <div class="container">
                 <div class="blog-header">
-                    <h1 class="blog-title"><a href={{ path('home') }}>MYBlog</a></h1>
-                    <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+                    <h1 class="blog-title"><a href={{ path('home') }}>Ahonymous BLOG</a></h1>
+                    {#<p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>#}
                 </div>
 
                 <div class="navbar-inner navbar-inverse blog-nav" data-spy="affix" data-offset-top="90">
@@ -46,29 +46,32 @@
                     app.request.attributes.get('_route') == 'home' ? 'active'
                     }}"
                        href={{ path('home') }}>
-                        <span class="glyphicon glyphicon-home"></span> Home
+                        <span class="glyphicon glyphicon-home"></span> {{ 'menu.home'|trans }}
                     </a>
                     <a class="blog-nav-item {{
                     app.request.attributes.get('_route') == 'about' ? 'active'
                     }}"
                        href={{ path('about') }}>
-                        <span class="glyphicon glyphicon-star"></span> About me
+                        <span class="glyphicon glyphicon-star"></span> {{ 'menu.about'|trans }}
                     </a>
                     <a class="blog-nav-item {{
                     app.request.attributes.get('_route') == 'guest' ? 'active'
                     }}"
                        href="{{ path('guest') }}">
-                        <span class="glyphicon glyphicon-book"></span> GuestBook
+                        <span class="glyphicon glyphicon-book"></span> {{ 'menu.guest'|trans }}
                     </a>
-
                     <form class="navbar-form navbar-right" role="search" action="{{ path('_search') }}" method="POST">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search" name="search">
+                            <input type="text" class="form-control" placeholder={{ 'menu.search'|trans }} name="search">
                             <button class="btn btn-default" type="submit">
                                 <span class="glyphicon glyphicon-search"> </span>
                             </button>
                         </div>
                     </form>
+
+                    <span class="dropdown blog-nav-item">
+                        {{ app.request.locale }}
+                    </span>
 
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <a href="{{ path('fos_user_security_logout') }}" class="blog-nav-item navbar-right">
@@ -102,7 +105,6 @@
                             <span class="glyphicon glyphicon-log-in" ></span>
                         </a>
                     {% endif %}
-
                 </div>
             </div>
         </div>

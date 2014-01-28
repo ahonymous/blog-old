@@ -23,7 +23,11 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem("Home", $this->get("router")->generate("home"));
+        $breadcrumbs->addItem(
+            $this->get('translator')->trans('menu.home'),
+            $this->get("router")->generate("home")
+        );
+//        var_dump($this->get('session'), $this->get('request'));
 
         $query = $em->getRepository('AhonymousBlogBundle:Article')
             ->findAllArticles();
@@ -47,7 +51,7 @@ class DefaultController extends Controller
         ;
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem(
-            $articleObject->getName(),
+            $this->get('translator')->trans('menu.about'),
             $this->get("router")->generate("about")
         );
 
@@ -65,7 +69,7 @@ class DefaultController extends Controller
 
         return array(
             'articles' => $queryMostViewed,
-            'name' => 'Most Viewed Articles',
+            'name' => $this->get('translator')->trans('sidebar.mVArticles'),
             'path_route' => 'article_show'
         );
     }
@@ -82,7 +86,7 @@ class DefaultController extends Controller
 
         return array(
             'articles' => $queryLastArticles,
-            'name' => 'Last Articles',
+            'name' => $this->get('translator')->trans('sidebar.lArticles'),
             'path_route' => 'article_show'
         );
     }
@@ -98,7 +102,7 @@ class DefaultController extends Controller
 
         return array(
             'articles' => $sidebarQuery,
-            'name' => 'Last Guests',
+            'name' => $this->get('translator')->trans('sidebar.lGuest'),
             'path_route' => '_single'
         );
     }

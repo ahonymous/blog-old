@@ -7,7 +7,7 @@
     <div>
         {% if (app.request.attributes.get('_route') == '_find') %}
             <div class="blog-post alert alert-info">
-                <h4 class="blog-title">You need searched "{{ searcher }}".</h4>
+                <h4 class="blog-title">{{ 'seacher.needed'|trans }} "{{ searcher }}".</h4>
             </div>
         {% endif %}
         {#{{ app.request.attributes.get('_route') == '_search' ? title|lower }}#}
@@ -44,7 +44,9 @@
         {% endfor %}
     </div>
 
+    {% if articles.haveToPaginate %}
         <div class="pagination">
             {{ pagerfanta(articles, 'twitter_bootstrap3') }}
         </div>
+    {% endif %}
 {% endblock content %}

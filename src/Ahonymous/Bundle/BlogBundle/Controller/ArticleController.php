@@ -126,7 +126,7 @@ class ArticleController extends Controller
         $em = $this->getDoctrine()->getManager();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem(
-            "Home",
+            $this->get('translator')->trans('menu.home'),
             $this->get("router")->generate("home")
         );
 
