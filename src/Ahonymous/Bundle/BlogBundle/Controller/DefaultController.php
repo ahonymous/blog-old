@@ -28,6 +28,7 @@ class DefaultController extends Controller
             $this->get("router")->generate("home")
         );
 //        var_dump($this->get('data_collector.router')->getTargetUrl());
+//        var_dump($this->getCloud());
 
         $query = $em->getRepository('AhonymousBlogBundle:Article')
             ->findAllArticles();
@@ -175,5 +176,27 @@ class DefaultController extends Controller
         }
 
         return $pager;
+    }
+
+    /**
+     * @Template("AhonymousBlogBundle::cloud.html.twig")
+     */
+    public function getCloudAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->getRepository('AhonymousBlogBundle:Category')
+            ->tags();
+        $toRender = $query->getResult();
+
+        $sum = $em->getRepository('AhonymousBlogBundle:Category')
+            ->sum();
+        shuffle($toRender);
+
+        return array(
+                'tags' => $toRender,
+                'title' => $this->get('translator')->trans('sidebar.cloud'),
+                'sum' => $sum[0][1]
+        );
     }
 }

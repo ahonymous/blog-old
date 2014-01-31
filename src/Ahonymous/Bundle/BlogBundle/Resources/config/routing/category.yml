@@ -2,10 +2,6 @@ category:
     pattern:  /
     defaults: { _controller: "AhonymousBlogBundle:Category:index" }
 
-category_show:
-    pattern:  /{slug}/show
-    defaults: { _controller: "AhonymousBlogBundle:Category:show" }
-
 category_new:
     pattern:  /new
     defaults: { _controller: "AhonymousBlogBundle:Category:new" }

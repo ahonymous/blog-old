@@ -2,6 +2,8 @@ sidebar:
     lArticles:  Last Articles
     lGuest:     Last Guests
     mVArticles: Most Viewed Articles
+    cloud:      Cloud Tag
 
 seacher:
     needed:     You need searched
+    category:   Category

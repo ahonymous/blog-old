@@ -32,9 +32,12 @@
 
                 <div class="blog-post-meta">
                     {% for category in article.categories %}
-
-                        {{ category }}&nbsp;
-                    {% endfor %}</div>
+                        <a href="{{ path('category_show', { 'slug': category }) }}">
+                            <strong>{{ category }}</strong>
+                        </a>
+                        &nbsp;
+                    {% endfor %}
+                </div>
                 <hr>
                 <a href="{{ path('article_show', { 'slug': article.slug }) }}">
                     Read more

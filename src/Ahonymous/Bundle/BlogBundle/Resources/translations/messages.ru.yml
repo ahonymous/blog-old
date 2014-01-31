@@ -2,6 +2,8 @@ sidebar:
     lArticles:  Последние статьи
     lGuest:     Последние отзывы
     mVArticles: Наиболие просматриваемые
+    cloud:      Облако тегов
 
 seacher:
     needed:     Вы искали
+    category:   Категория

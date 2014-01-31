@@ -60,6 +60,27 @@ class Category
     private $slug;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $countArticles;
+
+    /**
+     * @param mixed $countArticles
+     */
+    public function setCountArticles($countArticles)
+    {
+        $this->countArticles = $countArticles;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCountArticles()
+    {
+        return $this->countArticles;
+    }
+
+    /**
      * Get id
      *
      * @return integer

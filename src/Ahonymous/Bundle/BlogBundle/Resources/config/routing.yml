@@ -1,48 +1,35 @@
-_hello:
-    resource: "@AhonymousBlogBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 home:
-    pattern:  /{_locale}/{page}
+    pattern:  /{page}
     defaults: { _controller: "AhonymousBlogBundle:Default:index", _locale: en, page: 1 }
     requirements:
-        _locale: en|ru|uk
         page:  \d+
 
 about:
-    pattern:  /{_locale}/about
+    pattern:  /about
     defaults: { _controller: "AhonymousBlogBundle:Default:about", _locale: en }
-    requirements:
-        _locale: en|ru|uk
 
 _search:
-    pattern:  /{_locale}/search
+    pattern:  /search
     defaults: { _controller: "AhonymousBlogBundle:Default:search", _locale: en }
-    requirements:
-        _locale: en|ru|uk
 
 _find:
-    pattern:  /{_locale}/find/{searched}/{page}
+    pattern:  /find/{searched}/{page}
     defaults: { _controller: "AhonymousBlogBundle:Default:find", _locale: en, searched: '', page: 1 }
     requirements:
-        _locale: en|ru|uk
         page:  \d+
 
 _article:
     resource: "@AhonymousBlogBundle/Resources/config/routing/article.yml"
-    prefix:   /{_locale}/admin/article
-    requirements:
-        _locale: en|ru|uk
+    prefix:   /admin/article
 
 _category:
     resource: "@AhonymousBlogBundle/Resources/config/routing/category.yml"
-    prefix:   /{_locale}/admin/category
-    requirements:
-        _locale: en|ru|uk
+    prefix:   /admin/category
 
 article_show:
-    pattern:  /{_locale}/article/{slug}
+    pattern:  /article/{slug}
     defaults: { _controller: "AhonymousBlogBundle:Article:show" }
-    requirements:
-        _locale: en|ru|uk
+
+category_show:
+    pattern:  /{slug}/show
+    defaults: { _controller: "AhonymousBlogBundle:Category:show" }

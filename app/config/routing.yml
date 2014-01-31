@@ -1,5 +1,8 @@
 ahonymous_blog:
     resource: "@AhonymousBlogBundle/Resources/config/routing.yml"
+    prefix: /{_locale}
+    requirements:
+        _locale: en|ru|uk
 
 ahonymous_fos_user:
     resource: "@AhonymousUserBundle/Resources/config/routing.yml"

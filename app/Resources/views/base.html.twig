@@ -27,7 +27,7 @@
                 width: 90px;
                 height: 90px;
                 background: url('http://stfalcon.github.io/euromaidan/img/em-ribbon.png');
-                z-index: 2013;
+                z-index: -1;
                 border: 0;
             "
             title="Розмісти стрічку з символікою України і ЄС на своєму сайті!"
@@ -172,5 +172,9 @@
             <script src={{ asset('js/bootstrap.min.js') }}></script>
             <script src={{ asset('js/holder.js') }}></script>
         {% endblock %}
+
+        {#{% for sess in app.request.attributes %}#}
+            {#<p>{{ sess }}</p>#}
+        {#{% endfor %}#}
     </body>
 </html>

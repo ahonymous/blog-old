@@ -12,4 +12,24 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+    public function tags()
+    {
+        $query = $this->getEntityManager()->createQueryBuilder();
+        $query->select('c')
+            ->from('AhonymousBlogBundle:Category', 'c')
+            ->orderBy('c.countArticles', 'DESC')
+            ->setMaxResults(10)
+        ;
+
+        return $query->getQuery();
+    }
+
+    public function sum()
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('SELECT sum(c.countArticles) FROM AhonymousBlogBundle:Category c')
+        ;
+
+        return $query->getResult();
+    }
 }
