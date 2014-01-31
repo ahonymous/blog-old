@@ -21,8 +21,8 @@ class BlogExtension extends \Twig_Extension
 
     public function sizer($counts, $sum, $size = 14)
     {
-        if ($counts != 0){
-            $size = ($counts/ $sum)*100;
+        if ($counts != 0) {
+            $size += ($counts/ $sum)*100;
         }
 
         return $size;

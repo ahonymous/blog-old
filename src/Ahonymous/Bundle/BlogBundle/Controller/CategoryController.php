@@ -115,7 +115,6 @@ class CategoryController extends Controller
         }
 
 //        $deleteForm = $this->createDeleteForm($slug);
-
         return $this->render(
             'AhonymousBlogBundle:Category:show.html.twig',
             array(
