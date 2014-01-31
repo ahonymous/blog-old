@@ -114,13 +114,17 @@ class CategoryController extends Controller
             );
         }
 
-//        $deleteForm = $this->createDeleteForm($slug);
+        $articles = $category->getArticles();
+        if ($category->getCountArticles() != $articles->count()) {
+            $category->setCountArticles($articles->count());
+            $em->persist($category);
+        }
+
         return $this->render(
             'AhonymousBlogBundle:Category:show.html.twig',
             array(
                 'category'      => $category,
-//                'delete_form'   => $deleteForm->createView(),
-                'articles'      => $category->getArticles()
+                'articles'      => $articles
             )
         );
     }

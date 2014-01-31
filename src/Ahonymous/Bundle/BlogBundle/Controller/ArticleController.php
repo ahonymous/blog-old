@@ -232,6 +232,8 @@ class ArticleController extends Controller
             ->findOneBy(array('slug' => $slug));
         $id = $article->getId();
 
+        $categories = $request->get('article')['categories'];
+
         if (!$article) {
             throw $this->createNotFoundException(
                 'Unable to find Article entity.
@@ -243,6 +245,13 @@ class ArticleController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            foreach ($categories as $id_category) {
+                $category = $em->getRepository('AhonymousBlogBundle:Category')
+                    ->findOneBy(array('id' => $id_category));
+                $category->setCountArticles($category->getCountArticles()+1);
+                $em->persist($category);
+            }
+
             $em->flush();
             $updatedArticle = $em->getRepository('AhonymousBlogBundle:Article')
                 ->findOneBy(array('id' => $id));

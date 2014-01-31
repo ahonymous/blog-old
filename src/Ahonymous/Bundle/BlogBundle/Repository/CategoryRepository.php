@@ -32,4 +32,14 @@ class CategoryRepository extends EntityRepository
 
         return $query->getResult();
     }
+
+    public function howArticle($slug)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('SELECT count(c.articles) FROM AhonymousBlogBundle:Category c where c.slug = :1 ')
+            ->setParameter(1, "'".$slug."'")
+        ;
+
+        return $query->getResult();
+    }
 }
