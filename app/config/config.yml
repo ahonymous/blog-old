@@ -6,7 +6,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -49,3 +49,11 @@ white_october_breadcrumbs:
 #    locale:             defaults to null, so the default locale is used
 #    translation_domain: defaults to null, so the default domain is used
 #    viewTemplate:       "::breadcrumbs.html.twig"
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Ahonymous\Bundle\UserBundle\Entity\User
+    registration:
+        form:
+            validation_groups: [Registration]

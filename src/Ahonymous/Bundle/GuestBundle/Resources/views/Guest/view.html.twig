@@ -5,14 +5,13 @@
 {% block header %}
     <header>
         <div class="container">
-            <div class="pagerfanta">
-                {{ pagerfanta(guests, 'twitter_bootstrap3') }}
-            </div>
+
         </div>
     </header>
 {% endblock header %}
 
 {% block content %}
+
     {{ form_start(form) }}
         <div class="err">
             {{ form_errors(form.name) }}
@@ -73,10 +72,8 @@
             {{ guest.message | truncate(20) }}
         {% endfor %}
     </div>
-{% endblock content %}
 
-{% block footer %}
-    <div class="pagerfanta">
-        {{ pagerfanta(guests, 'twitter_bootstrap3') }}
-    </div>
-{% endblock footer %}
+<div class="pagination">
+    {{ pagerfanta(guests, 'twitter_bootstrap3') }}
+</div>
+{% endblock content %}

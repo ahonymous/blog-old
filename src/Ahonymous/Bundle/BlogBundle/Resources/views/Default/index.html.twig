@@ -7,7 +7,7 @@
     <div>
         {% if (app.request.attributes.get('_route') == '_find') %}
             <div class="blog-post alert alert-info">
-                <h4 class="blog-title">You need searched "{{ searcher }}".</h4>
+                <h4 class="blog-title">{{ 'seacher.needed'|trans }} "{{ searcher }}".</h4>
             </div>
         {% endif %}
         {#{{ app.request.attributes.get('_route') == '_search' ? title|lower }}#}
@@ -32,9 +32,12 @@
 
                 <div class="blog-post-meta">
                     {% for category in article.categories %}
-
-                        {{ category }}&nbsp;
-                    {% endfor %}</div>
+                        <a href="{{ path('category_show', { 'slug': category }) }}">
+                            <strong>{{ category }}</strong>
+                        </a>
+                        &nbsp;
+                    {% endfor %}
+                </div>
                 <hr>
                 <a href="{{ path('article_show', { 'slug': article.slug }) }}">
                     Read more
@@ -44,10 +47,9 @@
         {% endfor %}
     </div>
 
-    <div class="navbar-inner">
-        <div class="pagination pagination-centered">
+    {% if articles.haveToPaginate %}
+        <div class="pagination">
             {{ pagerfanta(articles, 'twitter_bootstrap3') }}
         </div>
-        {#<p>{{ articles|length }}</p>#}
-    </div>
+    {% endif %}
 {% endblock content %}

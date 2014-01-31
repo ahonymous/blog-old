@@ -14,8 +14,18 @@ class BlogExtension extends \Twig_Extension
     {
         return array(
             'endsWord' => new \Twig_Filter_Method($this, 'endsWord'),
-            'nl2p' => new \Twig_Filter_Method($this, 'nl2p')
+            'nl2p' => new \Twig_Filter_Method($this, 'nl2p'),
+            'sizer' => new \Twig_Filter_Method($this, 'sizer')
         );
+    }
+
+    public function sizer($counts, $sum, $size = 14)
+    {
+        if ($counts != 0) {
+            $size += ($counts/ $sum)*100;
+        }
+
+        return $size;
     }
 
     public function nl2p($str, $attribute = null)

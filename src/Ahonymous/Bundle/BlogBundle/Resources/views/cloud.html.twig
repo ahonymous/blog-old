@@ -1,0 +1,6 @@
+<div class="sidebar-module sidebar-module-inset">
+    <h4>{{ title }}</h4>
+    {% for tag in tags %}
+        <a href="{{ path( 'category_show', { 'slug': tag.slug }) }}" style="font-size: {{ tag.countArticles|sizer(sum) }}px">{{ tag.name }}</a>
+    {% endfor %}
+</div>

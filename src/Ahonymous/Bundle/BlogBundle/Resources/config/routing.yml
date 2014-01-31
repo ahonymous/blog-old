@@ -1,21 +1,22 @@
-_hello:
-    resource: "@AhonymousBlogBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-_search:
-    pattern:  /search
-    defaults: { _controller: "AhonymousBlogBundle:Default:search" }
-
-_find:
-    pattern:  /find/{searched}/{page}
-    defaults: { _controller: "AhonymousBlogBundle:Default:find", searched: '', page: 1 }
+home:
+    pattern:  /{page}
+    defaults: { _controller: "AhonymousBlogBundle:Default:index", _locale: en, page: 1 }
     requirements:
         page:  \d+
 
 about:
     pattern:  /about
-    defaults: { _controller: "AhonymousBlogBundle:Default:about" }
+    defaults: { _controller: "AhonymousBlogBundle:Default:about", _locale: en }
+
+_search:
+    pattern:  /search
+    defaults: { _controller: "AhonymousBlogBundle:Default:search", _locale: en }
+
+_find:
+    pattern:  /find/{searched}/{page}
+    defaults: { _controller: "AhonymousBlogBundle:Default:find", _locale: en, searched: '', page: 1 }
+    requirements:
+        page:  \d+
 
 _article:
     resource: "@AhonymousBlogBundle/Resources/config/routing/article.yml"
@@ -29,13 +30,6 @@ article_show:
     pattern:  /article/{slug}
     defaults: { _controller: "AhonymousBlogBundle:Article:show" }
 
-home:
-    pattern:  /{page}
-    defaults: { _controller: "AhonymousBlogBundle:Default:index", page: 1 }
-    requirements:
-        page:  \d+
-
-login:
-    pattern: /login
-    defaults: { _controller: "AhonymousBlogBundle:Default:login" }
-#    methods:  [POST]
+category_show:
+    pattern:  /{slug}/show
+    defaults: { _controller: "AhonymousBlogBundle:Category:show" }

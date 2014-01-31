@@ -18,7 +18,10 @@
         </p>
 
         {% for category in article.categories %}
-            <strong>{{ category }}&nbsp;</strong>
+            <a href="{{ path('category_show', { 'slug': category }) }}">
+            <strong>{{ category }}</strong>
+            </a>
+            &nbsp;
         {% endfor %}
         <hr>
         <p class="blog-post-meta">

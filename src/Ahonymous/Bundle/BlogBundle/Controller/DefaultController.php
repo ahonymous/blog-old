@@ -23,7 +23,10 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem("Home", $this->get("router")->generate("home"));
+        $breadcrumbs->addItem(
+            $this->get('translator')->trans('menu.home'),
+            $this->get("router")->generate("home")
+        );
 
         $query = $em->getRepository('AhonymousBlogBundle:Article')
             ->findAllArticles();
@@ -47,7 +50,7 @@ class DefaultController extends Controller
         ;
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem(
-            $articleObject->getName(),
+            $this->get('translator')->trans('menu.about'),
             $this->get("router")->generate("about")
         );
 
@@ -65,7 +68,7 @@ class DefaultController extends Controller
 
         return array(
             'articles' => $queryMostViewed,
-            'name' => 'Most Viewed Articles',
+            'name' => $this->get('translator')->trans('sidebar.mVArticles'),
             'path_route' => 'article_show'
         );
     }
@@ -82,7 +85,7 @@ class DefaultController extends Controller
 
         return array(
             'articles' => $queryLastArticles,
-            'name' => 'Last Articles',
+            'name' => $this->get('translator')->trans('sidebar.lArticles'),
             'path_route' => 'article_show'
         );
     }
@@ -98,7 +101,7 @@ class DefaultController extends Controller
 
         return array(
             'articles' => $sidebarQuery,
-            'name' => 'Last Guests',
+            'name' => $this->get('translator')->trans('sidebar.lGuest'),
             'path_route' => '_single'
         );
     }
@@ -174,16 +177,24 @@ class DefaultController extends Controller
     }
 
     /**
-     *  @Template()
+     * @Template("AhonymousBlogBundle::cloud.html.twig")
      */
-    public function loginAction()
+    public function getCloudAction()
     {
-        $form = $this->createFormBuilder()
-            ->add('login', 'text')
-            ->add('password', 'password')
-            ->add('save', 'submit')
-            ->getForm();
+        $em = $this->getDoctrine()->getManager();
 
-        return array('login_form' => $form);
+        $query = $em->getRepository('AhonymousBlogBundle:Category')
+            ->tags();
+        $toRender = $query->getResult();
+
+        $sum = $em->getRepository('AhonymousBlogBundle:Category')
+            ->sum();
+        shuffle($toRender);
+
+        return array(
+                'tags' => $toRender,
+                'title' => $this->get('translator')->trans('sidebar.cloud'),
+                'sum' => $sum[0][1]
+        );
     }
 }
