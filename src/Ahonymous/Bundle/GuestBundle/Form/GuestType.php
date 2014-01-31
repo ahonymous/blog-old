@@ -20,7 +20,7 @@ class GuestType extends AbstractType
         $builder->add('message', 'textarea');
     }
 
-    public function getDefaultOptions(array $options)
+    public function getDefaultOptions(/*array $options*/)
     {
         return array(
             'data_class' => 'Ahonymous\GuestBundle\Entity\Guest',
