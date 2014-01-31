@@ -118,6 +118,7 @@ class CategoryController extends Controller
         if ($category->getCountArticles() != $articles->count()) {
             $category->setCountArticles($articles->count());
             $em->persist($category);
+            $em->flush();
         }
 
         return $this->render(
