@@ -1,0 +1,43 @@
+{% extends 'AhonymousBlogBundle::main.html.twig' %}
+
+{% block content -%}
+    <div class="blog-post" >
+        <div class="alert alert-success">
+            <h1 class="blog-title">{{ 'seacher.category'|trans }} - {{ category.name }}</h1>
+        </div>
+
+        {% for article in articles %}
+            <div class="blog-post" >
+                <h2 class="blog-title">
+                    <a href="{{ path('article_show', { 'slug': article.slug }) }}">
+                        {{ article.name }}
+                    </a>
+                </h2>
+
+                <p class="blog-post-meta">
+                    {{ article.updated|date('M d Y') }},
+                    {{ article.author }}
+                </p>
+                <img class="img-thumbnail" src="{{ article.image | default("/defaultArticleImage.png")}}" alt="...">
+                <div class="media-body">
+                    <p>
+                        {{ article.body|endsWord(500)|nl2p("blog-post-body")|raw }}
+                    </p>
+                </div>
+
+                <div class="blog-post-meta">
+                    {% for category in article.categories %}
+                        <a href="{{ path('category_show', { 'slug': category }) }}">
+                            <strong>{{ category }}</strong>
+                        </a>
+                        &nbsp;
+                    {% endfor %}
+                </div>
+                <hr>
+                <a href="{{ path('article_show', { 'slug': article.slug }) }}">
+                    Read more
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

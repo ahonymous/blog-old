@@ -1,0 +1,22 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ title|default('TITLE') }}{% endblock title %}
+
+{% block body %}
+
+    <div class="col-sm-9 blog-main">
+        {% block content %}
+            {{ wo_render_breadcrumbs() }}
+        {% endblock content %}
+    </div><!-- /.blog-main -->
+
+    <div class="col-sm-3 blog-sidebar">
+        {% block sidebar %}
+            {{ render(controller('AhonymousBlogBundle:Default:sidebarLastArticles')) }}
+            {{ render(controller('AhonymousBlogBundle:Default:sidebarMostViewedArticles')) }}
+            {{ render(controller('AhonymousBlogBundle:Default:sidebarLastGuests')) }}
+            {{ render(controller('AhonymousBlogBundle:Default:getCloud')) }}
+        {% endblock sidebar %}
+    </div><!-- /.blog-sidebar -->
+
+{% endblock body %}
